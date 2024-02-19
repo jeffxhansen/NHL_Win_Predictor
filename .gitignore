@@ -1,3 +1,5 @@
+__pycache__/
+
 # don't include any data files
 data/*
 !data/.gitkeep
