@@ -41,5 +41,3 @@ def load_hockey_scraper_pbp():
         big_df.to_feather(combined_path)
         
         return big_df
-    
-    
