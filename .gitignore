@@ -4,3 +4,4 @@ __pycache__/
 data/*
 !data/.gitkeep
 !data/data.py
+.DS_Store
