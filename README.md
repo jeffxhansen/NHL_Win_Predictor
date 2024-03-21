@@ -15,3 +15,4 @@ This is an empty directory at the moment. I have added a .gitignore to ignore ev
 * Take into account penalty/powerplay positions to get more goals
 * +3,+2,+1,0,-1,-2,-3 player comparisons to help raise probability of goals
 * regression/correlation analysis to see player-diff affect on goal probability
+* get rid of more noisy events
