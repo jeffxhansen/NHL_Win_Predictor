@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from tqdm.auto import tqdm
 
 def get_data(file):
     
@@ -23,10 +24,11 @@ def get_data(file):
 
     # Iterate through the games
     final_df = pd.DataFrame()
+    game_bar = tqdm(total=len(unique_game_ids))
     for game_id in unique_game_ids:
-        home_df, away_df = get_data(df, game_id)
-        final_df = final_df.append(home_df)
-        final_df = final_df.append(away_df)
+        final_place = get_data(df, game_id)
+        final_df = final_df.append(final_place)
+        game_bar.update(1)
 
 
 def create_state_space(df, game_id):
@@ -40,7 +42,6 @@ def create_state_space(df, game_id):
     Returns:
     tuple: A tuple containing two DataFrames, one for home team events and one for away team events.
     """
-
     # Filter the DataFrame to get data for the specified game and drop rows with NaN values in event_team_type
     game1 = df[df.game_id == game_id] 
     game1 = game1.dropna(subset=['event_team_type'])
@@ -51,12 +52,12 @@ def create_state_space(df, game_id):
     event_types = np.append(event_types, ['TIME_REMAINING', 'HOME', 'WIN', 'TEAM', 'GAME_ID', 'CORSI', 'FENWICK'])
 
     # Create dictionaries to store event counts for home and away teams
-    home_dict = {event: 0 for event in event_types}
-    away_dict = {event: 0 for event in event_types}
+    final_dict = {f'HOME_{event}': 0 for event in event_types}
+    away_dict = {f'AWAY_{event}': 0 for event in event_types}
+    final_dict.update(away_dict)
 
     # Create DataFrames to store event data for home and away teams
-    home_df = pd.DataFrame(columns=home_dict.keys())
-    away_df = pd.DataFrame(columns=away_dict.keys())
+    final_df = False
 
     # Iterate through the events in the game and count them
     for _, row in game1.iterrows():
@@ -66,39 +67,46 @@ def create_state_space(df, game_id):
         
         # Determine if the event belongs to the home or away team and update counts accordingly
         if row['event_team_type'] == 'home':
-            home_dict[row['event_type']] += 1
-            home_dict['TIME_REMAINING'] = row['game_seconds_remaining']
-            home_dict['HOME'] = 1
-            home_dict['WIN'] = 1 if row['home_final'] > row['away_final'] else 0
-            home_dict['TEAM'] = row['team_encoded']
-            home_dict['GAME_ID'] = game_id
-            
+            final_dict[f"HOME_{row['event_type']}"] += 1
+            final_dict['TIME_REMAINING'] = row['game_seconds_remaining']
+            final_dict['HOME_HOME'] = 1
+            final_dict['WIN'] = 1 if row['home_final'] > row['away_final'] else 0
+            final_dict['HOME_TEAM'] = row['team_encoded']
+            final_dict['GAME_ID'] = game_id
+
             # Get the Corsi and Fenwick for the home team
             if row['strength_code'] == "EV":
-                home_dict['CORSI'] = calculate_corsi(home_dict)
-                home_dict['FENWICK'] = calculate_fenwick(home_dict)
-                home_dict['CORSI_FOR'] = calculate_corsi_for(home_dict['CORSI'], away_dict['CORSI'])
-                home_dict['FENWICK_FOR'] = calculate_fenwick_for(home_dict['FENWICK'], away_dict['FENWICK'])
+                final_dict['HOME_CORSI'] = calculate_corsi(final_dict, 'HOME')
+                final_dict['HOME_FENWICK'] = calculate_fenwick(final_dict, 'HOME')
+                final_dict['HOME_CORSI_FOR'] = calculate_corsi_for(final_dict['HOME_CORSI'], final_dict['AWAY_CORSI'])
+                final_dict['HOME_FENWICK_FOR'] = calculate_fenwick_for(final_dict['HOME_FENWICK'], final_dict['AWAY_FENWICK'])
             
-            home_df = home_df.append(home_dict, ignore_index=True)
+            # home_df = home_df.append(home_dict, ignore_index=True)
         else:
-            away_dict[row['event_type']] += 1
-            away_dict['TIME_REMAINING'] = row['game_seconds_remaining']
-            away_dict['HOME'] = 0
-            away_dict['WIN'] = 1 if row['home_final'] < row['away_final'] else 0
-            away_dict['TEAM'] = row['team_encoded']
-            away_dict['GAME_ID'] = game_id
+            final_dict[f"HOME_{row['event_type']}"] += 1
+            final_dict['TIME_REMAINING'] = row['game_seconds_remaining']
+            final_dict['HOME'] = 0
+            final_dict['WIN'] = 1 if row['home_final'] < row['away_final'] else 0
+            final_dict['AWAY_TEAM'] = row['team_encoded']
+            final_dict['GAME_ID'] = game_id
             
             # Get the Corsi and Fenwick for the away team
             if row['strength_code'] == "EV":
-                away_dict['CORSI'] = calculate_corsi(away_dict)
-                away_dict['FENWICK'] = calculate_fenwick(away_dict)
-                away_dict['CORSI_FOR'] = calculate_corsi_for(away_dict['CORSI'], home_dict['CORSI'])
-                away_dict['FENWICK_FOR'] = calculate_fenwick_for(away_dict['FENWICK'], home_dict['FENWICK'])
+                final_dict['AWAY_CORSI'] = calculate_corsi(final_dict, "AWAY")
+                final_dict['AWAY_FENWICK'] = calculate_fenwick(final_dict, "AWAY")
+                final_dict['AWAY_CORSI_FOR'] = calculate_corsi_for(final_dict['AWAY_CORSI'], final_dict['HOME_CORSI'])
+                final_dict['AWAY_FENWICK_FOR'] = calculate_fenwick_for(final_dict['AWAY_FENWICK'], final_dict['HOME_FENWICK'])
                 
-            away_df = away_df.append(away_dict, ignore_index=True)
+            # away_df = away_df.append(away_dict, ignore_index=True)
+        if type(final_df) is bool:
+            # print(final_dict)
+            final_df = pd.DataFrame(final_dict, index=[0])
+        else:
+            final_df = final_df.append(final_dict, ignore_index=True)
         
-    return home_df, away_df
+    
+        
+    return final_df
 
 
 def get_label_encoder(teams):
@@ -108,7 +116,7 @@ def get_label_encoder(teams):
     return le
 
 
-def calculate_corsi(team_dict):
+def calculate_corsi(team_dict, h_or_a):
     """
     Calculates the Corsi for a team.
 
@@ -118,10 +126,10 @@ def calculate_corsi(team_dict):
     Returns:
     int: The Corsi for the team.
     """
-    return team_dict['SHOT'] + team_dict['MISSED_SHOT'] + team_dict['BLOCKED_SHOT']
+    return team_dict[f'{h_or_a}_SHOT'] + team_dict[f'{h_or_a}_MISSED_SHOT'] + team_dict[f'{h_or_a}_BLOCKED_SHOT']
 
 
-def calculate_fenwick(team_dict):
+def calculate_fenwick(team_dict, h_or_a):
     """
     Calculates the Fenwick for a team.
 
@@ -131,7 +139,7 @@ def calculate_fenwick(team_dict):
     Returns:
     int: The Fenwick for the team.
     """
-    return team_dict['SHOT'] + team_dict['MISSED_SHOT']
+    return team_dict[f'{h_or_a}_SHOT'] + team_dict[f'{h_or_a}_MISSED_SHOT']
 
 
 def calculate_corsi_for(team_corsi, opp_corsi):
