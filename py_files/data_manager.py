@@ -30,6 +30,8 @@ def get_data(file):
         final_df = final_df.append(final_place)
         game_bar.update(1)
 
+    return final_df
+
 
 def create_state_space(df, game_id):
     """
@@ -81,12 +83,11 @@ def create_state_space(df, game_id):
                 final_dict['HOME_CORSI_FOR'] = calculate_corsi_for(final_dict['HOME_CORSI'], final_dict['AWAY_CORSI'])
                 final_dict['HOME_FENWICK_FOR'] = calculate_fenwick_for(final_dict['HOME_FENWICK'], final_dict['AWAY_FENWICK'])
             
-            # home_df = home_df.append(home_dict, ignore_index=True)
         else:
-            final_dict[f"HOME_{row['event_type']}"] += 1
+            final_dict[f"AWAY_{row['event_type']}"] += 1
             final_dict['TIME_REMAINING'] = row['game_seconds_remaining']
-            final_dict['HOME'] = 0
-            final_dict['WIN'] = 1 if row['home_final'] < row['away_final'] else 0
+            final_dict['AWAY_HOME'] = 0
+            final_dict['WIN'] = 0 if row['home_final'] < row['away_final'] else 1
             final_dict['AWAY_TEAM'] = row['team_encoded']
             final_dict['GAME_ID'] = game_id
             
@@ -97,14 +98,11 @@ def create_state_space(df, game_id):
                 final_dict['AWAY_CORSI_FOR'] = calculate_corsi_for(final_dict['AWAY_CORSI'], final_dict['HOME_CORSI'])
                 final_dict['AWAY_FENWICK_FOR'] = calculate_fenwick_for(final_dict['AWAY_FENWICK'], final_dict['HOME_FENWICK'])
                 
-            # away_df = away_df.append(away_dict, ignore_index=True)
+
         if type(final_df) is bool:
-            # print(final_dict)
             final_df = pd.DataFrame(final_dict, index=[0])
         else:
             final_df = final_df.append(final_dict, ignore_index=True)
-        
-    
         
     return final_df
 
