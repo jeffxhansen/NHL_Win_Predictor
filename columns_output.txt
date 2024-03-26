@@ -1,0 +1,904 @@
+xg
+xg
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_id
+event_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_type
+event_type
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+event
+event
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+secondary_type
+secondary_type
+<class 'str'>      7348830
+<class 'float'>    4200390
+Name: count, dtype: int64
+
+event_team
+event_team
+<class 'str'>      10150113
+<class 'float'>     1399107
+Name: count, dtype: int64
+
+event_team_type
+event_team_type
+<class 'str'>      10149657
+<class 'float'>     1399563
+Name: count, dtype: int64
+
+description
+description
+<class 'str'>      11546346
+<class 'float'>        2874
+Name: count, dtype: int64
+
+period
+period
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+period_seconds
+period_seconds
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+period_seconds_remaining
+period_seconds_remaining
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+game_seconds
+game_seconds
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+game_seconds_remaining
+game_seconds_remaining
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+home_score
+home_score
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+away_score
+away_score
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+event_player_1_name
+event_player_1_name
+<class 'float'>    7023114
+<class 'str'>      4526106
+Name: count, dtype: int64
+
+event_player_1_type
+event_player_1_type
+<class 'float'>    7054420
+<class 'str'>      4494800
+Name: count, dtype: int64
+
+event_player_2_name
+event_player_2_name
+<class 'float'>    7891400
+<class 'str'>      3657820
+Name: count, dtype: int64
+
+event_player_2_type
+event_player_2_type
+<class 'float'>    7890871
+<class 'str'>      3658349
+Name: count, dtype: int64
+
+event_player_3_name
+event_player_3_name
+<class 'float'>    11454344
+<class 'str'>         94876
+Name: count, dtype: int64
+
+event_player_3_type
+event_player_3_type
+<class 'float'>    11454215
+<class 'str'>         95005
+Name: count, dtype: int64
+
+event_goalie_name
+event_goalie_name
+<class 'float'>    10449058
+<class 'str'>       1100162
+Name: count, dtype: int64
+
+strength_state
+strength_state
+<class 'str'>      11548593
+<class 'float'>         627
+Name: count, dtype: int64
+
+strength_code
+strength_code
+<class 'str'>      11095453
+<class 'float'>      453767
+Name: count, dtype: int64
+
+strength
+strength
+<class 'str'>      11095453
+<class 'float'>      453767
+Name: count, dtype: int64
+
+game_winning_goal
+game_winning_goal
+<class 'float'>    11453164
+<class 'bool'>        96056
+Name: count, dtype: int64
+
+empty_net
+empty_net
+<class 'float'>    11122849
+<class 'bool'>       426371
+Name: count, dtype: int64
+
+penalty_severity
+penalty_severity
+<class 'float'>    11410206
+<class 'str'>        139014
+Name: count, dtype: int64
+
+penalty_minutes
+penalty_minutes
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_idx
+event_idx
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+num_on
+num_on
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+players_on
+players_on
+<class 'str'>      6006598
+<class 'float'>    5542622
+Name: count, dtype: int64
+
+num_off
+num_off
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+players_off
+players_off
+<class 'str'>      5920026
+<class 'float'>    5629194
+Name: count, dtype: int64
+
+extra_attacker
+extra_attacker
+<class 'bool'>     11021329
+<class 'float'>      527891
+Name: count, dtype: int64
+
+x
+x
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+y
+y
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+x_fixed
+x_fixed
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+y_fixed
+y_fixed
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+shot_distance
+shot_distance
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+shot_angle
+shot_angle
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_skaters
+home_skaters
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_skaters
+away_skaters
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_1
+home_on_1
+<class 'str'>      11326298
+<class 'float'>      222922
+Name: count, dtype: int64
+
+home_on_2
+home_on_2
+<class 'str'>      11325402
+<class 'float'>      223818
+Name: count, dtype: int64
+
+home_on_3
+home_on_3
+<class 'str'>      11324155
+<class 'float'>      225065
+Name: count, dtype: int64
+
+home_on_4
+home_on_4
+<class 'str'>      11230103
+<class 'float'>      319117
+Name: count, dtype: int64
+
+home_on_5
+home_on_5
+<class 'str'>      10164199
+<class 'float'>     1385021
+Name: count, dtype: int64
+
+home_on_6
+home_on_6
+<class 'float'>    11432347
+<class 'str'>        116873
+Name: count, dtype: int64
+
+home_on_7
+home_on_7
+<class 'float'>    11545776
+<class 'str'>          3444
+Name: count, dtype: int64
+
+away_on_1
+away_on_1
+<class 'str'>      11326275
+<class 'float'>      222945
+Name: count, dtype: int64
+
+away_on_2
+away_on_2
+<class 'str'>      11325467
+<class 'float'>      223753
+Name: count, dtype: int64
+
+away_on_3
+away_on_3
+<class 'str'>      11324454
+<class 'float'>      224766
+Name: count, dtype: int64
+
+away_on_4
+away_on_4
+<class 'str'>      11225355
+<class 'float'>      323865
+Name: count, dtype: int64
+
+away_on_5
+away_on_5
+<class 'str'>      10103984
+<class 'float'>     1445236
+Name: count, dtype: int64
+
+away_on_6
+away_on_6
+<class 'float'>    11434176
+<class 'str'>        115044
+Name: count, dtype: int64
+
+away_on_7
+away_on_7
+<class 'float'>    11546618
+<class 'str'>          2602
+Name: count, dtype: int64
+
+home_goalie
+home_goalie
+<class 'str'>      11183237
+<class 'float'>      365983
+Name: count, dtype: int64
+
+away_goalie
+away_goalie
+<class 'str'>      11181082
+<class 'float'>      368138
+Name: count, dtype: int64
+
+game_id
+game_id
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+event_player_1_id
+event_player_1_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_1_link
+event_player_1_link
+<class 'float'>    7298293
+<class 'str'>      4250927
+Name: count, dtype: int64
+
+event_player_1_season_total
+event_player_1_season_total
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_2_id
+event_player_2_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_2_link
+event_player_2_link
+<class 'float'>    8134161
+<class 'str'>      3415059
+Name: count, dtype: int64
+
+event_player_2_season_total
+event_player_2_season_total
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_3_id
+event_player_3_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_3_link
+event_player_3_link
+<class 'float'>    11460630
+<class 'str'>         88590
+Name: count, dtype: int64
+
+event_player_3_season_total
+event_player_3_season_total
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_4_id
+event_player_4_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_player_4_name
+event_player_4_name
+<class 'float'>    11475768
+<class 'str'>         73452
+Name: count, dtype: int64
+
+event_player_4_link
+event_player_4_link
+<class 'float'>    11480600
+<class 'str'>         68620
+Name: count, dtype: int64
+
+event_player_4_type
+event_player_4_type
+<class 'float'>    11475768
+<class 'str'>         73452
+Name: count, dtype: int64
+
+period_type
+period_type
+<class 'str'>      11540491
+<class 'float'>        8729
+Name: count, dtype: int64
+
+ordinal_num
+ordinal_num
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+period_time
+period_time
+<class 'str'>      11215476
+<class 'float'>      333744
+Name: count, dtype: int64
+
+period_time_remaining
+period_time_remaining
+<class 'float'>    6455570
+<class 'str'>      5093650
+Name: count, dtype: int64
+
+date_time
+date_time
+<class 'float'>    6455570
+<class 'str'>      5093650
+Name: count, dtype: int64
+
+event_team_id
+event_team_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_team_link
+event_team_link
+<class 'float'>    7296786
+<class 'str'>      4252434
+Name: count, dtype: int64
+
+event_team_abbr
+event_team_abbr
+<class 'float'>    6516207
+<class 'str'>      5033013
+Name: count, dtype: int64
+
+home_final
+home_final
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_final
+away_final
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_goalie_id
+event_goalie_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+event_goalie_link
+event_goalie_link
+<class 'float'>    10542535
+<class 'str'>       1006685
+Name: count, dtype: int64
+
+event_goalie_type
+event_goalie_type
+<class 'float'>    10542535
+<class 'str'>       1006685
+Name: count, dtype: int64
+
+season
+season
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+season_type
+season_type
+<class 'str'>    11123236
+<class 'int'>      425984
+Name: count, dtype: int64
+
+game_date
+game_date
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+game_start
+game_start
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+game_end
+game_end
+<class 'str'>      10711829
+<class 'float'>      837391
+Name: count, dtype: int64
+
+game_length
+game_length
+<class 'str'>      10711829
+<class 'float'>      837391
+Name: count, dtype: int64
+
+game_state
+game_state
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+detailed_state
+detailed_state
+<class 'str'>      10713113
+<class 'float'>      836107
+Name: count, dtype: int64
+
+venue_name
+venue_name
+<class 'str'>      10713113
+<class 'float'>      836107
+Name: count, dtype: int64
+
+venue_link
+venue_link
+<class 'str'>      10713113
+<class 'float'>      836107
+Name: count, dtype: int64
+
+home_name
+home_name
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+home_abbreviation
+home_abbreviation
+<class 'str'>      10713113
+<class 'float'>      836107
+Name: count, dtype: int64
+
+home_division_name
+home_division_name
+<class 'str'>      10713110
+<class 'float'>      836110
+Name: count, dtype: int64
+
+home_conference_name
+home_conference_name
+<class 'str'>      10713110
+<class 'float'>      836110
+Name: count, dtype: int64
+
+home_id
+home_id
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+away_name
+away_name
+<class 'str'>    11549220
+Name: count, dtype: int64
+
+away_abbreviation
+away_abbreviation
+<class 'str'>      10713113
+<class 'float'>      836107
+Name: count, dtype: int64
+
+away_division_name
+away_division_name
+<class 'str'>      10713110
+<class 'float'>      836110
+Name: count, dtype: int64
+
+away_conference_name
+away_conference_name
+<class 'str'>      10713110
+<class 'float'>      836110
+Name: count, dtype: int64
+
+away_id
+away_id
+<class 'int'>    11549220
+Name: count, dtype: int64
+
+venue_id
+venue_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_division_name_short
+home_division_name_short
+<class 'float'>    7777777
+<class 'str'>      3771443
+Name: count, dtype: int64
+
+away_division_name_short
+away_division_name_short
+<class 'float'>    7777777
+<class 'str'>      3771443
+Name: count, dtype: int64
+
+ids_on
+ids_on
+<class 'float'>    10394627
+<class 'str'>       1154593
+Name: count, dtype: int64
+
+ids_off
+ids_off
+<class 'float'>    10394627
+<class 'str'>       1154593
+Name: count, dtype: int64
+
+timeInPeriod
+timeInPeriod
+<class 'float'>    11215476
+<class 'str'>        333744
+Name: count, dtype: int64
+
+timeRemaining
+timeRemaining
+<class 'float'>    11215476
+<class 'str'>        333744
+Name: count, dtype: int64
+
+situationCode
+situationCode
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+homeTeamDefendingSide
+homeTeamDefendingSide
+<class 'float'>    11215476
+<class 'str'>        333744
+Name: count, dtype: int64
+
+sortOrder
+sortOrder
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+eventOwnerTeamId
+eventOwnerTeamId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+losingPlayerId
+losingPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+winningPlayerId
+winningPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+zoneCode
+zoneCode
+<class 'float'>    11273792
+<class 'str'>        275428
+Name: count, dtype: int64
+
+hittingPlayerId
+hittingPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+hitteePlayerId
+hitteePlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+shotType
+shotType
+<class 'float'>    11454637
+<class 'str'>         94583
+Name: count, dtype: int64
+
+shootingPlayerId
+shootingPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+goalieInNetId
+goalieInNetId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+awaySOG
+awaySOG
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+homeSOG
+homeSOG
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+reason
+reason
+<class 'float'>    11472930
+<class 'str'>         76290
+Name: count, dtype: int64
+
+playerId
+playerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+blockingPlayerId
+blockingPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+typeCode
+typeCode
+<class 'float'>    11540893
+<class 'str'>          8327
+Name: count, dtype: int64
+
+descKey
+descKey
+<class 'float'>    11540893
+<class 'str'>          8327
+Name: count, dtype: int64
+
+duration
+duration
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+committedByPlayerId
+committedByPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+drawnByPlayerId
+drawnByPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+scoringPlayerId
+scoringPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+scoringPlayerTotal
+scoringPlayerTotal
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+assist1PlayerId
+assist1PlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+assist1PlayerTotal
+assist1PlayerTotal
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+assist2PlayerId
+assist2PlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+assist2PlayerTotal
+assist2PlayerTotal
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+secondaryReason
+secondaryReason
+<class 'float'>    11538381
+<class 'str'>         10839
+Name: count, dtype: int64
+
+servedByPlayerId
+servedByPlayerId
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_goalie_in
+home_goalie_in
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_goalie_in
+away_goalie_in
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_1_id
+home_on_1_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_2_id
+home_on_2_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_3_id
+home_on_3_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_4_id
+home_on_4_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_5_id
+home_on_5_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_6_id
+home_on_6_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+home_on_7_id
+home_on_7_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_1_id
+away_on_1_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_2_id
+away_on_2_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_3_id
+away_on_3_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_4_id
+away_on_4_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_5_id
+away_on_5_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_6_id
+away_on_6_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_on_7_id
+away_on_7_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+venue
+venue
+<class 'float'>    10713113
+<class 'str'>        836107
+Name: count, dtype: int64
+
+home_abbr
+home_abbr
+<class 'float'>    10713113
+<class 'str'>        836107
+Name: count, dtype: int64
+
+away_abbr
+away_abbr
+<class 'float'>    10713113
+<class 'str'>        836107
+Name: count, dtype: int64
+
+home_goalie_id
+home_goalie_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+away_goalie_id
+away_goalie_id
+<class 'float'>    11549220
+Name: count, dtype: int64
+
+periodType
+periodType
+<class 'float'>    11519766
+<class 'str'>         29454
+Name: count, dtype: int64
+
