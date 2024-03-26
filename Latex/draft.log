@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  26 MAR 2024 13:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  26 MAR 2024 15:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -251,30 +251,30 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./draft.bbl
+) [1
+
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./draft.bbl
 Underfull \hbox (badness 1057) in paragraph at lines 4--9
 []\OT1/cmr/m/n/10.95 Dan Morse.  hockeyR-data: A col-lec-tion of hockey datasets for
  []
 
-[1
-
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./draft.aux)
+[2]) [3] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: 45DCAE00526D94967D46CE1DC995F7A2;768.
+(rerunfilecheck)             Checksum: 3DBDB3112B279E261B33C42AB5C36DCC;1437.
  ) 
 Here is how much of TeX's memory you used:
- 8556 strings out of 478268
- 132296 string characters out of 5846348
- 422297 words of memory out of 5000000
- 26669 multiletter control sequences out of 15000+600000
- 476832 words of font info for 57 fonts, out of 8000000 for 9000
+ 8567 strings out of 478268
+ 132455 string characters out of 5846348
+ 423301 words of memory out of 5000000
+ 26675 multiletter control sequences out of 15000+600000
+ 477139 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,6n,63p,318b,447s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 60i,6n,63p,318b,448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on draft.pdf (2 pages, 88681 bytes).
+Output written on draft.pdf (3 pages, 96233 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 104 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
+ 89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
