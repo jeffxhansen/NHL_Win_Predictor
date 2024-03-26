@@ -26,7 +26,7 @@ def get_data(file):
     final_df = pd.DataFrame()
     game_bar = tqdm(total=len(unique_game_ids))
     for game_id in unique_game_ids:
-        final_place = get_data(df, game_id)
+        final_place = create_state_space(df, game_id)
         final_df = final_df.append(final_place)
         game_bar.update(1)
 
