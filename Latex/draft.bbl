@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+
+\bibitem{hockeyR-data}
+Dan Morse.
+\newblock {hockeyR-data: A collection of hockey datasets for use with the
+  hockeyR package}.
+\newblock \url{https://github.com/danmorse314/hockeyR-data}, 2024.
+\newblock Accessed: March 2024.
+
+\end{thebibliography}
