@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref, enumitem}
 
 \title{Puck Predictions: Unraveling the NHL Game Forecasting Riddle}
 \author{Jason Vasquez \and Dylan Skinner \and Jeff Hansen \and Benjamin McMullin}
@@ -45,14 +45,14 @@ the event occured to make sure the event was recorded correctly. We did not find
 did not remove any strange events from out dataset.
 
 \section{Methods}
+
+\subsection{Bayesian Network}
+
 \subsection{t-SNE, UMAP, and PCA}
 
 \subsection{Regression and XGBoost}
 
 \subsection{MCMC Game Simulation}
-
-\subsection{Exponential Smoothing}
-% Your content for this section goes here
 
 \section{Results}
 % Your content for this section goes here
@@ -61,7 +61,20 @@ did not remove any strange events from out dataset.
 % Your content for this section goes here
 
 \section{Ethical Considerations}
-% Your content for this section goes here
+Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations. Here are some key points we want to address:
+
+\begin{itemize}[label=\textbullet]
+\item \textbf{Gambling and Addiction}:
+Our win percentages and predictions might be used by those who wish to gamble, which could lead to addiction and financial harm, especially if undue trust in placed in these methods. Any publication of these methods or predictions would be accompanied by promoting healthy and responsible gambling practices.
+    
+\item \textbf{Fairness and Integrity of the Game}:
+Sometimes, coaches and players becoming awareness of their 'chance' of winning can affect how the game is played, potentially harming the integrity of the sport. We must be careful to not provide an unfair advantage to any team or player.
+Inaccurate predictions could lead a team to believe that the game is out of reach when it isn't, and we want to avoid that.
+            
+\end{itemize}
+
+Overall, our predictions, like any, should not be considered declarative for gambling or performance purposes, but are rather an interesting exposition into the complexity of sporting events.
+
 
 \section{Conclusions}
 % Your content for this section goes here
