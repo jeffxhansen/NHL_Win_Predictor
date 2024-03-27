@@ -47,6 +47,18 @@ did not remove any strange events from out dataset.
 \section{Methods}
 
 \subsection{Bayesian Network}
+We first used a Bayesian Network to establish a benchmark for probability using several key features.
+
+Bayesian networks are probabilistic graphical models that represent probabilistic relationships among a set of variables using a directed acyclic graph (DAG). 
+In a Bayesian network, nodes represent random variables, and directed edges between nodes represent probabilistic dependencies between the variables. Each node in the graph is associated with a conditional probability distribution that quantifies the probability of that variable given its parent variables in the graph.
+
+For our purposes, we predefined the structure of the network, and used the data to calculate the conditional probabilities for each node. We then used the network to calculate the probability of a team winning given the current state of the game.
+
+The computational complexity of Bayesian Network inference is high, with exact inference being an NP-hard problem TODO CITE. 
+Using the python package pgmpy, we originally tried to fit a network with all 26 of our features, but our computational resources failed to fit this network.
+Then, to get a baseline for our future predictions, we simply fitted the model with the base features of home goals, away goals, home shots, away shots, home blocked shots, and away blocked shots. 
+These features were chosen as priors because of our opinion that they are the most important to the game, based upon our knowledge of hockey.
+
 
 \subsection{t-SNE, UMAP, and PCA}
 
@@ -68,7 +80,7 @@ Predicting win percentages or outcomes in hockey games, like any sport, raises s
 Our win percentages and predictions might be used by those who wish to gamble, which could lead to addiction and financial harm, especially if undue trust in placed in these methods. Any publication of these methods or predictions would be accompanied by promoting healthy and responsible gambling practices.
     
 \item \textbf{Fairness and Integrity of the Game}:
-Sometimes, coaches and players becoming awareness of their 'chance' of winning can affect how the game is played, potentially harming the integrity of the sport. We must be careful to not provide an unfair advantage to any team or player.
+Sometimes, coaches and players becoming aware of their chance of winning can affect how the game is played, potentially harming the integrity of the sport. We must be careful to not provide an unfair advantage to any team or player.
 Inaccurate predictions could lead a team to believe that the game is out of reach when it isn't, and we want to avoid that.
             
 \end{itemize}
