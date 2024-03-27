@@ -1,6 +1,97 @@
 import pandas as pd
 import numpy as np
 from tqdm.auto import tqdm
+import os
+
+RELEVANT_COLUMNS = [
+    "game_date",
+    "date_time",
+    "game_id",
+    "home_name",
+    "away_name",
+    "event_type",
+    "description",
+    "penalty_severity",
+    "penalty_minutes",
+    "event_team",
+    "event_team_type",
+    "period_type",
+    "period",
+    "period_seconds",
+    "period_seconds_remaining",
+    "game_seconds",
+    "game_seconds_remaining",
+    "home_score",
+    "away_score",
+    "home_final",
+    "away_final",
+    "strength_state",
+    "strength_code",
+    "strength",
+    "empty_net",
+    "extra_attacker",
+    "home_skaters",
+    "away_skaters"
+]
+
+EVENTS_IGNORED = [
+    'CHANGE', 'DELAYED_PENALTY', 'CHALLENGE', 
+    'FAILED_SHOT_ATTEMPT', 'UNKNOWN', 
+    'PERIOD_END', 'GAME_SCHEDULED', 'GAME_END',
+    'PERIOD_START', 'SHOOTOUT_COMPLETE', 'EARLY_INT_START',
+    'EARLY_INT_END', 'EMERGENCY_GOALTENDER',
+    'STOP' # this is a stoppage of play and can be icing, puck in netting, puck in benches, puck in crowd, goalie stopped, ect.
+]
+
+def load_and_clean_csv(path):
+    """ takes in a year as an integer [2010, 2023] and returns a pandas
+    dataframe without any nan values."""
+    df = pd.read_csv(path, encoding='latin1')
+    
+    # only keep the relevant columns, and get rid of the events
+    # that are not relevant or never really show up
+    rel_cols = [col for col in RELEVANT_COLUMNS if col in df.columns]
+    df = df[rel_cols]
+    df = df[~df['event_type'].isin(EVENTS_IGNORED)]
+    
+    for col in df.columns:
+        # if the column is type string or has mixed data types
+        if df[col].dtype == 'object':
+            # fill the nans with a "-" string
+            df[col].fillna("-", inplace=True)
+            # make the whole column have string type. This makes
+            # the column have a single data type
+            df[col] = df[col].astype(str)
+            
+        # if the column is numerical, fill the nans with 0
+        else:
+            df[col].fillna(0, inplace=True)
+            
+    # include the date_time and game_date columns. Usually game_date has values
+    # when date_time is NaN, so fill the NaN date_time entries with the associated
+    # value game_time
+    if 'game_date' in df.columns and 'date_time' in df.columns:
+        df['date_time'] = df['date_time'].fillna(df['game_date'])
+    elif 'game_date' in df.columns:
+        df['date_time'] = df['game_date']
+    elif 'date_time' in df.columns:
+        df['game_date'] = df['date_time']
+    else:
+        df['date_time'] = "-"
+        df['game_date'] = "-"
+            
+    return df
+
+def load_clean_feather(year):
+    """ if the feather file exists, load it and return it. Otherwise, return None
+    """
+    path = f"data/play_by_play_{year}_{year-2000+1}_clean.feather"
+    if os.path.exists(path):
+        return pd.read_feather(path)
+    else:
+        return None
+    
+
 
 def get_data(file):
     
