@@ -16,3 +16,9 @@ This is an empty directory at the moment. I have added a .gitignore to ignore ev
 * +3,+2,+1,0,-1,-2,-3 player comparisons to help raise probability of goals
 * regression/correlation analysis to see player-diff affect on goal probability
 * get rid of more noisy events
+
+# assumptions
+
+* There are rows where there are 0 home_skaters or 0 away_skaters. Most of these occur during period==5, and they appear to happen during shootouts or penalty shots. Right now, I am working on including power play states, and so I am forward filling these rows where there are 0 skaters.
+* ignoring the event_type=='STOP': this is a stoppage of play and can be icing, puck in netting, puck in benches, puck in crowd, goalie stopped, etc. and the following event of a penalty or faceoff is usually more descriptive of what happened
+* ignoring the event_type=='HIT' since it happens a lot and is not indicative of winning or losing
