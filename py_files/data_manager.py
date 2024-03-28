@@ -85,7 +85,22 @@ def load_and_clean_csv(path):
     else:
         df['date_time'] = "-"
         df['game_date'] = "-"
-            
+        
+    # setup the strenght column to always be in the perspective of home
+    df['home_skaters'] = df['home_skaters'].astype(int)
+    df['away_skaters'] = df['away_skaters'].astype(int)
+    df['home_skaters'] = df['home_skaters'].replace(0, np.nan).ffill().astype(int)
+    df['away_skaters'] = df['away_skaters'].replace(0, np.nan).ffill().astype(int)
+    df['strength_state'] = df['home_skaters'].copy().astype(str) + 'v' + df['away_skaters'].copy().astype(str)
+    
+    df['strength_code'] = 'EV'
+    df.loc[df['home_skaters'] > df['away_skaters'], 'strength_code'] = 'PP'
+    df.loc[df['home_skaters'] < df['away_skaters'], 'strength_code'] = 'SH'
+    
+    df['strength'] = 'Even'
+    df.loc[df['home_skaters'] > df['away_skaters'], 'strength'] = 'Power Play'
+    df.loc[df['home_skaters'] < df['away_skaters'], 'strength'] = 'Short Handed'
+    
     return df
 
 def load_clean_feather(year):
