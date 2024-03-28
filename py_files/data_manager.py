@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from tqdm.auto import tqdm
+from jeffutils.utils import movecol
 import os
 
 RELEVANT_COLUMNS = [
@@ -46,7 +47,12 @@ EVENTS_IGNORED = [
 def load_and_clean_csv(path):
     """ takes in a year as an integer [2010, 2023] and returns a pandas
     dataframe without any nan values."""
-    df = pd.read_csv(path, encoding='latin1')
+    if '.csv' in path:
+        df = pd.read_csv(path, encoding='latin1')
+    elif '.feather' in path:
+        df = pd.read_feather(path)
+    else:
+        raise ValueError("path must be of type .csv or .feather")
     
     # only keep the relevant columns, and get rid of the events
     # that are not relevant or never really show up
@@ -95,7 +101,6 @@ def load_clean_feather(year):
 
 def get_data(file):
     
-    
     # Get the file
     df = pd.read_csv(file)
     
@@ -122,6 +127,96 @@ def get_data(file):
         game_bar.update(1)
 
     return final_df
+
+
+def create_state_space_opt(path, show_pbar=True):
+    """ takes in a path to a csv (ex: 'data/play_by_play/play_by_play_2010_11.csv'
+    and returns a pandas dataframe with the cleaned key data where each row is an 
+    event with the state space up to that point. Each state space column is like:
+    'STATE_FACEOFF_HOME', 'STATE_FACEOFF_AWAY', etc.
+    """
+    if not os.path.exists(path):
+        raise ValueError(f"{path} does not exist")
+    
+    df = load_and_clean_csv(path)
+    
+    # ignore all of the HIT events
+    df = df.loc[
+        (df['event_type'] != 'HIT') & # comment this line out to include HIT events
+        (df['event_team_type'] != "-"), :].copy()
+    
+    # distinguish the events between home and away
+    df['event_type'] = df['event_type'].astype(str) + '_' + df['event_team_type'].astype(str).str.upper()
+
+    # sort the dataframe by game_id and game_seconds to ensure vectorized
+    # operations are in order
+    df = df.sort_values(by=['game_id', 'game_seconds'], ascending=[True, True])
+
+    # add an order column to ensure that the pandas merge works later
+    df['order'] = np.arange(len(df))
+
+    # create a smaller dataframe with just the relevant columns for getting the state counts
+    count_cols = ['game_id', 'event_type', 'order']
+    other_cols = [c for c in df.columns if c not in count_cols]
+    df_rel = df[count_cols].copy()
+    df_rel['count'] = 1
+
+    # pivot the table on the event_type, so that there is a zero for each event
+    # that occured at each timestep and a 0 for all of the others
+    piv_tab = (pd.pivot_table(df_rel, 
+                            values='count', 
+                            index=['game_id', 'order'], 
+                            columns=['event_type'])
+            .reset_index()
+            .fillna(0))
+
+    # create the cumulative counts for all of the new event columns in the pivot table
+    event_cols = [c for c in piv_tab.columns if c != 'game_id' and c != 'order']
+    pbar = tqdm(total=len(event_cols)) if show_pbar else None
+    for col in event_cols:
+        pbar.set_description(str(col)) if show_pbar else None
+        
+        piv_tab[col] = piv_tab[col].astype(int)
+        
+        # get a cumulative sum
+        piv_tab[col+"_cumsum"] = piv_tab[col].cumsum()
+
+        # for the last entries of each game, get the different between cumulative sums
+        last_rows = piv_tab['game_id'].shift(-1) != piv_tab['game_id']
+        last_rows_df = piv_tab.loc[last_rows, :].copy()
+        last_rows_df[col+"_cumsum"] = -1*last_rows_df[col+"_cumsum"]
+        last_rows_df[col+"_cumsum_diff"] = last_rows_df[col+"_cumsum"].diff().fillna(0)
+        first_cumsum = last_rows_df.loc[last_rows_df.index[0], col+"_cumsum"]
+        last_rows_df.loc[last_rows_df.index[0], col+"_cumsum_diff"] = first_cumsum
+
+        # align cumsum_diff with the original dataframe
+        piv_tab = pd.merge(piv_tab, last_rows_df[['game_id', 'order', col+"_cumsum_diff"]], on=['game_id', 'order'], how='left')
+        piv_tab[col+"_offset"] = piv_tab[col+"_cumsum_diff"].fillna(0)
+        piv_tab[col+"_offset2"] = piv_tab[col+"_offset"].shift(1).fillna(0)
+
+        # compute the adjusted column
+        piv_tab[col+"_adjusted"] = piv_tab[col].copy() + piv_tab[col+"_offset2"]
+
+        # cumulative sum column'
+        piv_tab[col+'_raw'] = piv_tab[col].copy()
+        piv_tab[col+'_total'] = piv_tab[col+"_adjusted"].cumsum().astype(int)
+
+        # only keep the new total column (get rid of the intermediate columns)
+        piv_tab = movecol(piv_tab, [col+'_total', col+'_raw'], col, 'After')
+        piv_tab = piv_tab.drop(columns=[col])
+        piv_tab = piv_tab.rename(columns={col+'_total': col})
+        drop_cols = [col+'_cumsum', col+'_cumsum_diff', col+'_offset', col+'_offset2', col+"_adjusted"]
+        raw_cols = [c for c in piv_tab.columns if 'raw' in c]
+        piv_tab = piv_tab.drop(columns=drop_cols+raw_cols)
+        
+        # rename the event_cols to have state_ at the front
+        piv_tab = piv_tab.rename(columns={col: 'STATE_'+col})
+        
+        pbar.update(1) if show_pbar else None
+
+    df = df.merge(piv_tab, on=['game_id', 'order'], how='left')
+    
+    return df
 
 
 def create_state_space(df, game_id):
