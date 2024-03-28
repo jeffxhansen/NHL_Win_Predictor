@@ -1,0 +1,1 @@
+def simulate_games(curr_state_df)
