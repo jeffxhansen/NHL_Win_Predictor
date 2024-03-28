@@ -108,48 +108,64 @@ These features were chosen as priors because of our opinion that they are the mo
 
 \subsection{MCMC Game Simulation}
 
-To simulate hockey games, we setup a Markov Chain where the states are a tuple of three consecutive
+To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
 events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
 then the away team shot the puck and missed, the markov chain would look like figure \ref{fig:markov_chain_sample}.
-The probabilities of transitioning from one triple-state to another triple-state is calculated by:
-\begin{align*}
-    P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
-    &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
-\end{align*}
-Where $A,B,C,D$ are events that can occur in a game, and the tuple (A,B,C,D) represents that "A then 
-B then C then D" happend right after eachother in a game. 
 
-To simulate a game, we performed this monte carlo algorithm:
-
-\begin{algorithm}
-\caption{Simulation Algorithm}
-\begin{algorithmic}[1]
-\State $\text{time\_remaining} \gets 3600$
-\State $s0 \gets "\#"$
-\State $s1 \gets "\#"$
-\State $s2 \gets "\#"$
-
-\While{$\text{time\_remaining} > 0$}
-    \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
-    \State $s0 \gets s1$
-    \State $s1 \gets s2$
-    \State $s2 \gets \text{next\_state}$
-    
-    \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
-    \State $\text{time\_remainting} \gets \text{time\_remainting} - \text{event\_time}$
-\EndWhile
-\end{algorithmic}
-\end{algorithm}
-
-
-% add the image images/markov_chain_sample.png
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/markov_chain_sample.png}
     \caption{Sample Markov Chain for the current state (home team won faceoff, 
     home team lost puck, away team missed shot) with the probabilities of the next event 
     sorted from highest to lowest}
     \label{fig:markov_chain_sample}
+\end{figure}
+
+The probabilities of transitioning from one triple-state to another triple-state is calculated by:
+\begin{align*}
+    P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
+    &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
+\end{align*}
+Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that "A then 
+B then C then D" happened right after each other in a game.
+
+To simulate a game, we performed this Monte Carlo algorithm that acted like a random walk through the Markov Chain:
+\begin{algorithm}[H]
+    \caption{Simulation Algorithm}
+    \begin{algorithmic}[1]
+        \State $\text{time\_remaining} \gets 3600$
+        \Comment{NHL games are 3600 seconds}
+        \State $s_0 \gets "\#"$
+        \Comment{The "\#" symbol represents the start of a game}
+        \State $s_1 \gets "\#"$
+        \State $s_2 \gets "\#"$
+        %\State $\text{event\_counts} \gets \text{dictionary()}$
+
+        \While{$\text{time\_remaining} > 0$}
+            \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
+            %\State $\text{event\_counts}[\text{next\_state}] \mathrel{+}= 1$
+            
+            \State $s_0 \gets s_1$
+            \State $s_1 \gets s_2$
+            \State $s_2 \gets \text{next\_state}$
+
+            \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
+            \State $\text{time\_remaining} \gets (\text{time\_remaining} - \text{event\_time})$
+        \EndWhile
+    \end{algorithmic}
+    \label{alg:monte_carlo_algorithm}
+\end{algorithm}
+The KDE\_times() is a KDE model fit on the amount of seconds that transpired between each hockey event for all NHL games over the course of 13 years. This KDE model resembled a poisson distribution with $\lambda \approx 18$. During the course of the algorithm, we maintained a count of all of the events that transpired. Upon termination of the simulation, we compared home goals to away goals and termed a winner. If there was a tie, we would run the algorithm until another team scored a goal, thus simulating overtime per NHL rules.
+
+To predict a probability of a certain team winning a hockey game, we would run 50 simulations with our algorithm, but we would initialize the starting states $(s_0, s_1, s_2)$ to be the most current events in the hockey game. Out of the 50 simulations, we would compute $P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$ and $P(\text{away winning}) = 1-P(\text{home winning})$.
+
+To evaluate our simulation's effectiveness at accurately modeling actual hockey games, we combined a dataset with the final event counts for 1500 actual hockey games and for 1500 simulated games. We then performed PCA, t-SNE and UMAP dimensionality reductions using various perplexity and neighbor hyperparameters to see if these algorithms clustered the synthetic games and actual games in different clusters. As shown below in \ref{fig:simulation_v_actual}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/simulation_v_actual_dimred.png}
+    \caption{PCA, t-SNE and UMAP performed on a dataset with final event counts for 1500 simulated and 1500 actual NHL games. This evidences that our simulation accurately emulates live NHL games}
+    \label{fig:simulation_v_actual}
 \end{figure}
 
 
