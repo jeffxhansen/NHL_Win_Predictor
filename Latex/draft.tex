@@ -1,5 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref, enumitem, tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \title{Puck Predictions: Unraveling the NHL Game Forecasting Riddle}
 \author{Jason Vasquez \and Dylan Skinner \and Jeff Hansen \and Benjamin McMullin}
@@ -104,7 +106,54 @@ These features were chosen as priors because of our opinion that they are the mo
 
 \subsection{Regression and XGBoost}
 
-\subsection{Markov Chain Game Simulation}
+\subsection{MCMC Game Simulation}
+
+To simulate hockey games, we setup a Markov Chain where the states are a tuple of three consecutive
+events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
+then the away team shot the puck and missed, the markov chain would look like figure \ref{fig:markov_chain_sample}.
+The probabilities of transitioning from one triple-state to another triple-state is calculated by:
+\begin{align*}
+    P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
+    &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
+\end{align*}
+Where $A,B,C,D$ are events that can occur in a game, and the tuple (A,B,C,D) represents that "A then 
+B then C then D" happend right after eachother in a game. 
+
+To simulate a game, we performed this monte carlo algorithm:
+
+\begin{algorithm}
+\caption{Simulation Algorithm}
+\begin{algorithmic}[1]
+\State $\text{time\_remaining} \gets 3600$
+\State $s0 \gets "\#"$
+\State $s1 \gets "\#"$
+\State $s2 \gets "\#"$
+
+\While{$\text{time\_remaining} > 0$}
+    \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
+    \State $s0 \gets s1$
+    \State $s1 \gets s2$
+    \State $s2 \gets \text{next\_state}$
+    
+    \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
+    \State $\text{time\_remainting} \gets \text{time\_remainting} - \text{event\_time}$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+% add the image images/markov_chain_sample.png
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/markov_chain_sample.png}
+    \caption{Sample Markov Chain for the current state (home team won faceoff, 
+    home team lost puck, away team missed shot) with the probabilities of the next event 
+    sorted from highest to lowest}
+    \label{fig:markov_chain_sample}
+\end{figure}
+
+
+
 
 \section{Results}
 % Your content for this section goes here
