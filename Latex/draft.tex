@@ -26,12 +26,18 @@ predict games. In addition to this, most sports have easily accessible statistic
 Hockey, however, is a different story. While there are some methods used to predict the outcome of National Hockey League (NHL) games, these models
 typically belong to sport books and their nuances are not publicly disclosed. Additionally, hockey analytics is not as
 developed as it is in other sports, such as basketball or baseball. This lack of model transparency and public interest in hockey analytics
-makes predicting the outcomes of NHL games a challenging problem. That is where this project comes in. The goal of this project is simple: predict
-the outcomes of NHL games and provide a live win probability for any given game state.
+makes predicting the outcomes of NHL games a very underdeveloped and challenging problem. Previous attempts and research into predicting NHL games
+has relied on methods such as decision trees and artificial neural networks~\cite{pishcedda} (from 2014), naïve bayes and support vector machines~\cite{weissbock2013use} (from 2013),
+and Monte Carlo simulations~\cite{Weissbock2014ForecastingSI} (from 2014).
 
-Despite the simplicity of the problem statement, as mentioned, the solution is not so straightforward. The NHL provides fast-paced games with many events
-occuring in quick succession. Our goal is to sift through the data points and identify key features that will allow us to predict the outcome of a game and
-ignore other features that exist as seeming proxy noise.
+In addition to model research, some research has also gone into developing new features that can be used to better predict the game outcomes. 
+The two biggest engineered classes of features are the Corsi (\url{https://en.wikipedia.org/wiki/Corsi_(statistic)})
+ and Fenwick (\url{https://en.wikipedia.org/wiki/Fenwick_(statistic)}) metrics (both from 2007). 
+
+Our project seeks a similar outcome to the research mentioned above: predict the outcomes of NHL games. Not only this,
+but we seek to provide live, acturate win probabilities for any given game state. Despite the simplicity of the problem statement, 
+as mentioned, the solution is not so straightforward. The NHL provides fast-paced games with many events
+occuring in quick succession. Our goal is to use this abundance of data and new approaches to build upon previous research.
 
 Our motivation for this project exists strictly as fans of the sport and as data scientists. Our model is not intended to be used for gambling or any other
 nefarious purposes—any use of this model for such purposes is a misuse of our work.

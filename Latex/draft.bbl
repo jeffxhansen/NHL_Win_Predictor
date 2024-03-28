@@ -7,4 +7,23 @@ Dan Morse.
 \newblock \url{https://github.com/danmorse314/hockeyR-data}, 2024.
 \newblock Accessed: March 2024.
 
+\bibitem{pishcedda}
+Gianni Pischedda.
+\newblock Predicting nhl match outcomes with ml models.
+\newblock {\em International Journal of Computer Applications}, 101:15--22, 09
+  2014.
+
+\bibitem{weissbock2013use}
+Jason Weissbock, Herna Viktor, and Diana Inkpen.
+\newblock Use of performance metrics to forecast success in the national hockey
+  league.
+\newblock In {\em European Conference on Machine Learning: Sports Analytics and
+  Machine Learning Workshop}, 2013.
+
+\bibitem{Weissbock2014ForecastingSI}
+Josh Weissbock.
+\newblock Forecasting success in the national hockey league using in-game
+  statistics and textual data.
+\newblock 2014.
+
 \end{thebibliography}
