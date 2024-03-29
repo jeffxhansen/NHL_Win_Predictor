@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  29 MAR 2024 07:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  29 MAR 2024 16:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -450,32 +450,51 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip59
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip60
+\subfigcapskip=\skip61
+\subfigcaptopadj=\dimen261
+\subfigbottomskip=\skip62
+\subfigcapmargin=\dimen262
+\subfiglabelskip=\skip63
+\c@subfigure=\count313
+\c@lofdepth=\count314
+\c@subtable=\count315
+\c@lotdepth=\count316
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2022/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip64
+\subfig@bottom=\skip65
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count313
+\l__color_backend_stack_int=\count317
 \l__pdf_internal_box=\box66
 ) (./draft.aux)
 \openout1 = `draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-Package hyperref Info: Link coloring OFF on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+Package hyperref Info: Link coloring OFF on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2022/texmf-dist/tex/latex/refcount/refcount.sty
@@ -483,27 +502,27 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/local/texlive/2022/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count314
+\c@section@level=\count318
 )
-LaTeX Info: Redefining \ref on input line 9.
-LaTeX Info: Redefining \pageref on input line 9.
-LaTeX Info: Redefining \nameref on input line 9.
+LaTeX Info: Redefining \ref on input line 10.
+LaTeX Info: Redefining \pageref on input line 10.
+LaTeX Info: Redefining \nameref on input line 10.
  (./draft.out) (./draft.out)
 \@outlinefile=\write4
 \openout4 = `draft.out'.
 
  (/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count315
-\scratchdimen=\dimen261
+\scratchcounter=\count319
+\scratchdimen=\dimen263
 \scratchbox=\box67
-\nofMPsegments=\count316
-\nofMParguments=\count317
+\nofMPsegments=\count320
+\nofMParguments=\count321
 \everyMPshowfont=\toks44
-\MPscratchCnt=\count318
-\MPscratchDim=\dimen262
-\MPnumerator=\count319
-\makeMPintoPDFobject=\count320
+\MPscratchCnt=\count322
+\MPscratchDim=\dimen264
+\MPnumerator=\count323
+\makeMPintoPDFobject=\count324
 \everyMPtoPDFconversion=\toks45
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -511,71 +530,97 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2022/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 13.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 13.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (1.07373pt too wide) in paragraph at lines 78--80
+Overfull \hbox (1.07373pt too wide) in paragraph at lines 79--81
 []\OT1/cmr/m/n/10.95 Bayesian net-works are prob-a-bilis-tic graph-i-cal mod-els that rep-re-sent prob-
  []
 
 [3]
-<images/markov_chain_sample.png, id=85, 703.62875pt x 154.5775pt>
+<images/markov_chain_sample.png, id=89, 703.62875pt x 154.5775pt>
 File: images/markov_chain_sample.png Graphic file (type png)
 <use images/markov_chain_sample.png>
-Package pdftex.def Info: images/markov_chain_sample.png  used on input line 123.
+Package pdftex.def Info: images/markov_chain_sample.png  used on input line 141.
 (pdftex.def)             Requested size: 288.0011pt x 63.26868pt.
- [4
+ [4]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 158.
+ [5
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.134 \end{align*}
-                   <./images/markov_chain_sample.png>]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 140.
-
-Overfull \hbox (4.27791pt too wide) in paragraph at lines 172--178
+l.189 
+       <./images/markov_chain_sample.png>]
+Overfull \hbox (4.27791pt too wide) in paragraph at lines 190--196
 \OMS/cmsy/m/n/10.95 f[]g\OML/cmm/m/it/10.95 =\OT1/cmr/m/n/10.95 50$ and $\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([]) = 1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([])$. 
  []
 
-[5]
-<images/pca_tsne_umap_sim_act.png, id=102, 715.473pt x 286.671pt>
+<images/pca_tsne_umap_sim_act.png, id=106, 715.473pt x 286.671pt>
 File: images/pca_tsne_umap_sim_act.png Graphic file (type png)
 <use images/pca_tsne_umap_sim_act.png>
-Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 190.
+Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 208.
 (pdftex.def)             Requested size: 323.9978pt x 129.81436pt.
- [6
+[6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
-       <./images/pca_tsne_umap_sim_act.png>] (./draft.bbl
+l.222 
+       <./images/pca_tsne_umap_sim_act.png>]
+<images/good_bayesian_example.png, id=114, 722.7pt x 361.35pt>
+File: images/good_bayesian_example.png Graphic file (type png)
+<use images/good_bayesian_example.png>
+Package pdftex.def Info: images/good_bayesian_example.png  used on input line 225.
+(pdftex.def)             Requested size: 323.9978pt x 161.99948pt.
+ [7
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.242 
+       <./images/good_bayesian_example.png>]
+<images/good_xgb_example.png, id=124, 609.9588pt x 325.215pt>
+File: images/good_xgb_example.png Graphic file (type png)
+<use images/good_xgb_example.png>
+Package pdftex.def Info: images/good_xgb_example.png  used on input line 245.
+(pdftex.def)             Requested size: 216.0022pt x 115.1668pt.
+<images/good_xgb_example(2).png, id=125, 609.9588pt x 325.215pt>
+File: images/good_xgb_example(2).png Graphic file (type png)
+<use images/good_xgb_example(2).png>
+Package pdftex.def Info: images/good_xgb_example(2).png  used on input line 246.
+(pdftex.def)             Requested size: 216.0022pt x 115.1668pt.
+ [8
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.264 
+       <./images/good_xgb_example.png> <./images/good_xgb_example(2).png>] (./draft.bbl
 Underfull \hbox (badness 1057) in paragraph at lines 13--18
 []\OT1/cmr/m/n/10.95 Dan Morse.  hockeyR-data: A col-lec-tion of hockey datasets for
  []
 
-) [7] (./draft.aux)
+) [9] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: 2737454212065DC13C4140389C5C2EB3;1245.
+(rerunfilecheck)             Checksum: 38079B77A0FA68A38EDD85D7F3D281FD;1385.
  ) 
 Here is how much of TeX's memory you used:
- 21019 strings out of 478268
- 391339 string characters out of 5846348
- 650303 words of memory out of 5000000
- 38838 multiletter control sequences out of 15000+600000
+ 21230 strings out of 478268
+ 394983 string characters out of 5846348
+ 651198 words of memory out of 5000000
+ 39033 multiletter control sequences out of 15000+600000
  480491 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,11n,104p,474b,635s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,11n,104p,797b,635s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on draft.pdf (7 pages, 663377 bytes).
+Output written on draft.pdf (9 pages, 908276 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 147 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 103 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 217 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 
