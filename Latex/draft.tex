@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref, enumitem, tikz}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{subfigure}
 
 \title{Puck Predictions: Unraveling the NHL Game Forecasting Riddle}
 \author{Jason Vasquez \and Dylan Skinner \and Jeff Hansen \and Benjamin McMullin}
@@ -116,13 +117,45 @@ The conditional dependencies of the chosen network are shown in the DAG below:
 This model was chosen for the task because different stats in hockey are conditionally dependent of each other, so by modeling those conditional
 dependencies and feeding them into the model, we can hopefully acheive a more accurate prediction of the outcome of the game.
 
-\subsection{Regression and XGBoost}
+\subsection{XGBoost}
+
+In our NHL analysis research, we partitioned the dataset into segments 
+corresponding to individual teams' games over multiple seasons. 
+This enabled the creation of time series data in the form of a state vector, capturing the 
+play-by-play dynamics of each team's matches. We then trained 
+separate XGBoost models for each team to learn their unique patterns 
+and strategies. Leveraging the {\tt .predict\_proba()} method of XGBoost, we generated 
+probabilistic predictions at various stages of a game, allowing us to 
+plot the evolving probability of each team winning throughout the match
+(see~\ref{fig:xgboost_res}). 
+This approach provided insights into momentum shifts (when one team 
+has an advantage due to them having more players on the ice due to 
+a penalty by the opposing team), key moments (such as goals and 
+penalties, and critical plays influencing game outcomes).
+
+% Images
+\begin{figure}[H]
+    \centering
+    \subfigure[]{\includegraphics[width=0.9\textwidth]{images/good_xgb_example.png}} 
+    \subfigure[]{\includegraphics[width=0.9\textwidth]{images/good_xgb_example(2).png}} 
+    \caption{For both of these plots, the home team is above the the 50\% line, with the
+    away team below. The title has the final score of the game. \\
+        \textbf{(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. 
+    Notice the probability shifts after one team scores a goal.  \\
+        \textbf{(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets.
+        Notice the stark changes in probabilities after each goal. Also notice the
+        shift in probabilities even when no goals are scored. This suggests
+        the XGBoost model is able to pick up on momentum shifts.}
+    \label{fig:xgboost_res}
+\end{figure}
+
+
 
 \subsection{MCMC Game Simulation}
 
 To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
 events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
-then the away team shot the puck and missed, the markov chain would look like figure \ref{fig:markov_chain_sample}.
+then the away team shot the puck and missed, the markov chain would look like figure~\ref{fig:markov_chain_sample}.
 
 \begin{figure}[H]
     \centering
