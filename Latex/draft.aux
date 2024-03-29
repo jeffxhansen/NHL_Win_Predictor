@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -23,21 +26,22 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{3}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Bayesian Network}{3}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}XGBoost}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf  {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf  {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored. This suggests the XGBoost model is able to pick up on momentum shifts.}}{5}{figure.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{5}{figure.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{5}{figure.1}\protected@file@percent }
-\newlabel{fig:xgboost_res}{{1}{5}{For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored. This suggests the XGBoost model is able to pick up on momentum shifts}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}MCMC Game Simulation}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}}{6}{figure.2}\protected@file@percent }
-\newlabel{fig:markov_chain_sample}{{2}{6}{Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}{figure.2}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Simulation Algorithm}}{6}{algorithm.1}\protected@file@percent }
-\newlabel{alg:monte_carlo_algorithm}{{1}{6}{MCMC Game Simulation}{algorithm.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1289 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}}{7}{figure.3}\protected@file@percent }
-\newlabel{fig:simulation_v_actual}{{3}{7}{PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1289 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}{figure.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Analysis}{8}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Bayesian Network}{8}{subsection.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}}{8}{figure.4}\protected@file@percent }
-\newlabel{fig:bayesian_graph}{{4}{8}{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}MCMC Game Simulation}{4}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:markov_chain_sample}{{1}{5}{Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}{figure.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Simulation Algorithm}}{5}{algorithm.1}\protected@file@percent }
+\newlabel{alg:monte_carlo_algorithm}{{1}{5}{MCMC Game Simulation}{algorithm.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1289 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:simulation_v_actual}{{2}{6}{PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1289 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Analysis}{7}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Bayesian Network}{7}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:bayesian_graph}{{3}{7}{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}XGBoost}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf  {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf  {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored. This suggests the XGBoost model is able to pick up on momentum shifts.}}{8}{figure.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{8}{figure.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:xgboost_res}{{4}{8}{For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored. This suggests the XGBoost model is able to pick up on momentum shifts}{figure.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Ethical Considerations}{8}{section.5}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{references}

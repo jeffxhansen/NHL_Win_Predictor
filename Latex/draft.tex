@@ -124,31 +124,10 @@ corresponding to individual teams' games over multiple seasons.
 This enabled the creation of time series data in the form of a state vector, capturing the 
 play-by-play dynamics of each team's matches. We then trained 
 separate XGBoost models for each team to learn their unique patterns 
-and strategies. Leveraging the {\tt .predict\_proba()} method of XGBoost, we generated 
-probabilistic predictions at various stages of a game, allowing us to 
-plot the evolving probability of each team winning throughout the match
-(see~\ref{fig:xgboost_res}). 
-This approach provided insights into momentum shifts (when one team 
-has an advantage due to them having more players on the ice due to 
-a penalty by the opposing team), key moments (such as goals and 
-penalties, and critical plays influencing game outcomes).
-
-% Images
-\begin{figure}[H]
-    \centering
-    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example.png}} 
-    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example(2).png}} 
-    \caption{For both of these plots, the home team is above the the 50\% line, with the
-    away team below. The title has the final score of the game. \\
-        \textbf{(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. 
-    Notice the probability shifts after one team scores a goal.  \\
-        \textbf{(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets.
-        Notice the stark changes in probabilities after each goal. Also notice the
-        shift in probabilities even when no goals are scored. This suggests
-        the XGBoost model is able to pick up on momentum shifts.}
-    \label{fig:xgboost_res}
-\end{figure}
-
+and strategies. We chose to create an XGBoost model for each team
+because we felt it would be more accurate than a single model for all teams.
+This is because some teams do very well and some teams do very poorly, and
+we felt this difference necessitated a model for each team.
 
 
 \subsection{MCMC Game Simulation}
@@ -246,6 +225,34 @@ We see this in the probability graph below, where the changes in probability cor
     \includegraphics[width=0.9\textwidth]{images/good_bayesian_example.png}
     \caption{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}
     \label{fig:bayesian_graph}
+\end{figure}
+
+\subsection{XGBoost}
+
+As mentioned in the methods section, we trained an XGBoost model for each team in the NHL. One main benefit of this
+approach is the ability to leverage the {\tt .predict\_proba()} method of XGBoost.
+Using this method, we generated 
+probabilistic predictions at various stages of a game, allowing us to 
+plot the evolving probability of each team winning throughout the match
+(see~\ref{fig:xgboost_res}). 
+This approach provided insights into momentum shifts (when one team 
+has an advantage due to them having more players on the ice due to 
+a penalty by the opposing team), key moments (such as goals and 
+penalties, and critical plays influencing game outcomes).
+
+\begin{figure}[H]
+    \centering
+    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example.png}} 
+    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example(2).png}} 
+    \caption{For both of these plots, the home team is above the the 50\% line, with the
+    away team below. The title has the final score of the game. \\
+        \textbf{(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. 
+    Notice the probability shifts after one team scores a goal.  \\
+        \textbf{(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets.
+        Notice the stark changes in probabilities after each goal. Also notice the
+        shift in probabilities even when no goals are scored. This suggests
+        the XGBoost model is able to pick up on momentum shifts.}
+    \label{fig:xgboost_res}
 \end{figure}
 
 \section{Ethical Considerations}
