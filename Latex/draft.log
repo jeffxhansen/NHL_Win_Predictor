@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.9)  29 MAR 2024 13:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.9)  29 MAR 2024 14:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -470,8 +470,7 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count314
 \l__pdf_internal_box=\box67
-)
-No file draft.aux.
+) (./draft.aux)
 \openout1 = `draft.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -493,10 +492,11 @@ LaTeX Font Info:    ... okay on input line 9.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
 Package hyperref Info: Link coloring OFF on input line 9.
+ (./draft.out) (./draft.out)
 \@outlinefile=\write4
 \openout4 = `draft.out'.
 
-(/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count315
 \scratchdimen=\dimen263
@@ -522,40 +522,20 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [1
 
-LaTeX Warning: Citation `pishcedda' on page 1 undefined on input line 32.
-
-
-LaTeX Warning: Citation `weissbock2013use' on page 1 undefined on input line 32.
-
-
-LaTeX Warning: Citation `Weissbock2014ForecastingSI' on page 1 undefined on input line 33.
-
-[1
-
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Citation `hockeyR-data' on page 2 undefined on input line 51.
-
-[2]
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 Overfull \hbox (1.07373pt too wide) in paragraph at lines 78--80
 []\OT1/cmr/m/n/10.95 Bayesian net-works are prob-a-bilis-tic graph-i-cal mod-els that rep-re-sent prob-
  []
 
-
-LaTeX Warning: Citation `pmlr-vR0-chickering95a' on page 3 undefined on input line 83.
-
 [3]
-
-LaTeX Warning: Reference `fig:markov_chain_sample' on page 4 undefined on input line 125.
-
-<images/markov_chain_sample.png, id=38, 703.62875pt x 154.5775pt>
+<images/markov_chain_sample.png, id=85, 703.62875pt x 154.5775pt>
 File: images/markov_chain_sample.png Graphic file (type png)
 <use images/markov_chain_sample.png>
 Package pdftex.def Info: images/markov_chain_sample.png  used on input line 129.
 (pdftex.def)             Requested size: 288.0011pt x 63.26868pt.
-[4
+ [4
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
@@ -568,53 +548,38 @@ Overfull \hbox (4.27791pt too wide) in paragraph at lines 178--184
  []
 
 [5]
-
-LaTeX Warning: Reference `fig:simulation_v_actual' on page 6 undefined on input line 190.
-
-<images/pca_tsne_umap_sim_act.png, id=56, 715.473pt x 286.671pt>
+<images/pca_tsne_umap_sim_act.png, id=102, 715.473pt x 286.671pt>
 File: images/pca_tsne_umap_sim_act.png Graphic file (type png)
 <use images/pca_tsne_umap_sim_act.png>
 Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 196.
 (pdftex.def)             Requested size: 323.9978pt x 129.81436pt.
-[6
+ [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.213 
-      {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/pca_tsne_umap_sim_act.png>] (./draft.bbl
+       <./images/pca_tsne_umap_sim_act.png>] (./draft.bbl
 Underfull \hbox (badness 1057) in paragraph at lines 13--18
 []\OT1/cmr/m/n/10.95 Dan Morse.  hockeyR-data: A col-lec-tion of hockey datasets for
  []
 
-) [7] (./draft.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `draft.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `draft.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  2737454212065DC13C4140389C5C2EB3;1245.
+[7{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [8] (./draft.aux)
+Package rerunfilecheck Info: File `draft.out' has not changed.
+(rerunfilecheck)             Checksum: FA55B6DB213C369A694EA4BCFF6D3315;1373.
  ) 
 Here is how much of TeX's memory you used:
- 21093 strings out of 476025
- 393270 string characters out of 5790017
+ 21111 strings out of 476025
+ 393473 string characters out of 5790017
  1861388 words of memory out of 5000000
- 41162 multiletter control sequences out of 15000+600000
+ 41173 multiletter control sequences out of 15000+600000
  523519 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,11n,104p,470b,634s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on draft.pdf (7 pages, 663044 bytes).
+Output written on draft.pdf (8 pages, 664511 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 150 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -198,11 +198,15 @@ simulation effectively emulates live NHL games.
     \label{fig:simulation_v_actual}
 \end{figure}
 
-\section{Results}
+\section{Results and Analysis}
 % Your content for this section goes here
 
-\section{Analysis}
-% Your content for this section goes here
+\subsection{Bayesian Network}
+
+Overall, the Bayesian Network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
+then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian Network struggled to capture the intricate dependencies
+of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over probability calculation of goals and time reamining given historical data.
+We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game.
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations. Here are some key points we want to address:
