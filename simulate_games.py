@@ -121,6 +121,85 @@ def simulate_games(n_games:int, save_path:str):
 
     return games_full
 
+def get_simulation_prob(curr_snapshot:pd.DataFrame, probs:pd.DataFrame, kde):
+    
+    # extract the events_dictionary, seconds_remaining, and the latest
+    # three events from the current game snapshot
+    curr_dict = curr_snapshot.to_dict(orient='records')[-1]
+    seconds_remaining = curr_dict['game_seconds_remaining']
+    
+    diffs = (curr_snapshot.diff()
+        .dropna()
+        .reset_index(drop=True)
+        .drop(columns=['game_seconds_remaining']))
+    cols = np.array(diffs.columns)
+    inds = np.argmax(diffs.to_numpy(), axis=1)
+    events = cols[inds]
+    if len(events) >= 3:
+        prev3, prev2, prev1 = events[-3], events[-2], events[-1]
+    elif len(events) == 2:
+        prev3, prev2, prev1 = '#', events[-2], events[-1]
+    elif len(events) == 1:
+        prev3, prev2, prev1 = '#', '#', events[-1]
+    else:
+        prev3, prev2, prev1 = '#', '#', '#'
+    
+    ####################################
+    #        SIMULATE THE GAME         #
+    ####################################
+    
+    n_games = 50
+
+    # simulte n_games
+    games = []
+    last_game_states = []
+    game_bar = tqdm(total=n_games)
+    for game_id in range(n_games):
+        
+        i = 0
+        samples = kde.sample(100000).astype(int).flatten()
+        
+        # setup the start of the game
+        game_id = str(game_id).zfill(8)
+        
+        # the curr_dict will keep track of the current state of the game
+        # with counts of each event
+        curr_dict['time_remaining'] = seconds_remaining
+        game_dicts = [curr_dict.copy()]
+        
+        while ((seconds_remaining > 0) or 
+               (curr_dict['GOAL_HOME'] == curr_dict['GOAL_AWAY'])):
+            
+            game_bar.set_description(str(seconds_remaining))
+            
+            # select a next event based on the probabilities
+            curr_table = probs[(probs['prev3'] == prev3) & (probs['prev2'] == prev2) & (probs['prev1'] == prev1)]
+            curr_event = np.random.choice(curr_table['curr_event'], p=curr_table['probability_avg'])
+            prev3, prev2, prev1 = prev2, prev1, curr_event
+            
+            # sample from the distribution of how long it takes for an
+            # event to occur, and upated the seconds_remaining
+            event_time = samples[i]
+            i += 1
+            seconds_remaining -= event_time
+            
+            # update the state dictionary
+            curr_dict['time_remaining'] = seconds_remaining
+            curr_dict[curr_event] += 1
+            game_dicts.append(curr_dict.copy())
+                
+        game_bar.update(1)
+            
+        # create this games dataframe and add it to the list of dataframes
+        last_game_states.append(curr_dict.copy())
+    
+    final_states_df = pd.DataFrame(last_game_states)
+    home_wins = np.sum(final_states_df['GOAL_HOME'] > final_states_df['GOAL_AWAY'])
+    home_prob = home_wins / n_games
+    away_prob = 1 - home_prob
+
+    return home_prob, away_prob
+
 if __name__ == "__main__":
     args = sys.argv[1:]  # Read command-line arguments, excluding script name
     if len(args) != 2:
