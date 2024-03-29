@@ -1,5 +1,14 @@
 \begin{thebibliography}{1}
 
+\bibitem{pmlr-vR0-chickering95a}
+David~Maxwell Chickering, Dan Geiger, and David Heckerman.
+\newblock Learning bayesian networks: Search methods and experimental results.
+\newblock In Doug Fisher and Hans-Joachim Lenz, editors, {\em Pre-proceedings
+  of the Fifth International Workshop on Artificial Intelligence and
+  Statistics}, volume~R0 of {\em Proceedings of Machine Learning Research},
+  pages 112--128. PMLR, 04--07 Jan 1995.
+\newblock Reissued by PMLR on 01 May 2022.
+
 \bibitem{hockeyR-data}
 Dan Morse.
 \newblock {hockeyR-data: A collection of hockey datasets for use with the

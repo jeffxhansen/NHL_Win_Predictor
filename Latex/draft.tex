@@ -48,7 +48,7 @@ nefarious purposes—any use of this model for such purposes is a misuse of our 
 
 \section{Data}
 % Your content for this section goes here
-Our data came from the hockeyR Github repository\cite{hockeyR-data}. This repository contains an abundance of data about every NHL game
+Our data came from the hockeyR Github repository~\cite{hockeyR-data}. This repository contains an abundance of data about every NHL game
 that has occured since the 2010-11 season. This data includes information about the events that transpire in a game (hits, shots, goals, etc.),
 which teams are playing, who is on the ice, and the final score of the game. The data is stored in a series of {\tt .csv.gz} files, allowing for
 easy access and manipulation.
@@ -80,7 +80,7 @@ In a Bayesian network, nodes represent random variables, and directed edges betw
 
 For our purposes, we predefined the structure of the network, and used the data to calculate the conditional probabilities for each node. We then used the network to calculate the probability of a team winning given the current state of the game.
 
-The computational complexity of Bayesian Network inference is high, with exact inference being an NP-hard problem TODO CITE. 
+The computational complexity of Bayesian Network inference is high, with exact inference being an NP-hard problem~\cite{pmlr-vR0-chickering95a}. 
 Using the python package pgmpy, we originally tried to fit a network with all 26 of our features, but our computational resources failed to fit this network.
 Then, to get a baseline for our future predictions, we simply fitted the model with the base features of time remaining (tr), home goals (hg), away goals (ag), home shots (hs), away shots (as), home blocked shots (hbs), and away blocked shots (abs). 
 These features were chosen as priors because of our opinion that they are the most important to the game, based upon our knowledge of hockey.
@@ -109,8 +109,6 @@ The conditional dependencies of the chosen network are shown in the DAG below:
 
     \end{tikzpicture} 
 \end{center}
-
-\subsection{t-SNE, UMAP, and PCA}
 
 \subsection{Regression and XGBoost}
 
@@ -183,14 +181,14 @@ games, we combined a dataset with the final event counts for 1500 actual hockey
 games and for 1500 simulated games. We then performed PCA, t-SNE and UMAP 
 dimensionality reductions using various perplexity and neighbor hyperparameters 
 to see if these algorithms clustered the synthetic games and actual games in 
-different clusters. As shown below in \ref{fig:simulation_v_actual}, the simulated
+different clusters. As shown below in~\ref{fig:simulation_v_actual}, the simulated
 games and actual games are all clustered together, thus demonstrating that our
 simulation effectively emulates live NHL games.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/simulation_v_actual_dimred.png}
-    \caption{PCA, t-SNE and UMAP performed on a dataset with final event counts for 1500 simulated and 1500 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}
+    \includegraphics[width=0.9\textwidth]{images/pca_tsne_umap_sim_act.png}
+    \caption{PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1289 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games}
     \label{fig:simulation_v_actual}
 \end{figure}
 
