@@ -4,6 +4,10 @@ from tqdm import tqdm
 import numpy as np
 import os
 import sys
+import time
+from jeffutils.utils import stack_trace
+
+from py_files.simulator import get_simulation_prob
 
 def simulate_games(n_games:int, save_path:str):
     
@@ -121,97 +125,110 @@ def simulate_games(n_games:int, save_path:str):
 
     return games_full
 
-def get_simulation_prob(curr_snapshot:pd.DataFrame, probs:pd.DataFrame, kde):
+def get_game_probabilities(game_id):
     
-    # extract the events_dictionary, seconds_remaining, and the latest
-    # three events from the current game snapshot
-    curr_dict = curr_snapshot.to_dict(orient='records')[-1]
-    seconds_remaining = curr_dict['game_seconds_remaining']
+    df_full = pd.read_feather("data/play_by_play/play_by_play_full_state_space.feather")
     
-    diffs = (curr_snapshot.diff()
-        .dropna()
+    # load the probability table
+    prob_mc = pd.read_csv("data/probability_tables/probabilities_avg_NOHIT.csv")
+    prob_mc = prob_mc[['prev3', 'prev2', 'prev1', 'curr_event', 'probability_avg']]
+    prob_mc = prob_mc.rename(columns={'probability_avg': 'probability'})
+
+    df = df_full.copy()
+
+    curr_game = df.loc[df['game_id'] == game_id, :].copy()
+    home_name = curr_game['home_name'].values[0]
+    away_name = curr_game['away_name'].values[0]
+    game_date = curr_game['game_date'].values[0]
+
+    simulation_cols = ['game_seconds_remaining'] + [c for c in curr_game.columns if 'STATE' in c]
+    simulation_cols_new = [c.replace("STATE_", "") for c in simulation_cols]
+    state_portion = (curr_game
+        .loc[:, simulation_cols]
+        .copy()
         .reset_index(drop=True)
-        .drop(columns=['game_seconds_remaining']))
-    cols = np.array(diffs.columns)
-    inds = np.argmax(diffs.to_numpy(), axis=1)
-    events = cols[inds]
-    if len(events) >= 3:
-        prev3, prev2, prev1 = events[-3], events[-2], events[-1]
-    elif len(events) == 2:
-        prev3, prev2, prev1 = '#', events[-2], events[-1]
-    elif len(events) == 1:
-        prev3, prev2, prev1 = '#', '#', events[-1]
-    else:
-        prev3, prev2, prev1 = '#', '#', '#'
-    
-    ####################################
-    #        SIMULATE THE GAME         #
-    ####################################
-    
-    n_games = 50
+        .rename(columns=dict(zip(simulation_cols, simulation_cols_new))))
 
-    # simulte n_games
-    games = []
-    last_game_states = []
-    game_bar = tqdm(total=n_games)
-    for game_id in range(n_games):
+    # load the probability table
+    prob_mc = pd.read_csv("data/probability_tables/probabilities_avg_NOHIT.csv")
+    prob_mc = prob_mc[['prev3', 'prev2', 'prev1', 'curr_event', 'probability_avg']]
+    prob_mc = prob_mc.rename(columns={'probability_avg': 'probability'})
+
+    with open("data/pickles/kde_seconds_NOHIT.pickle", "rb") as f:
+        kde_seconds = pickle.load(f)
         
-        i = 0
-        samples = kde.sample(100000).astype(int).flatten()
+    # sample from the game every minute
+    rows_to_simulate = list(range(0, len(state_portion), len(state_portion) // 10))
+    simulation_probabilities = []
+    for i, ind in enumerate(rows_to_simulate):
+        inds = np.arange(max(0, ind-4), ind+1)
+        curr_snapshot = state_portion.loc[inds, :].copy()
+        print("Seconds remaining:", curr_snapshot['game_seconds_remaining'].values[-1], f"({i+1}/{len(rows_to_simulate)})")
         
-        # setup the start of the game
-        game_id = str(game_id).zfill(8)
+        home_prob, away_prob = get_simulation_prob(curr_snapshot, prob_mc, kde_seconds, verbose=True)
+        simulation_probabilities.append((home_prob, away_prob))
         
-        # the curr_dict will keep track of the current state of the game
-        # with counts of each event
-        curr_dict['time_remaining'] = seconds_remaining
-        game_dicts = [curr_dict.copy()]
-        
-        while ((seconds_remaining > 0) or 
-               (curr_dict['GOAL_HOME'] == curr_dict['GOAL_AWAY'])):
-            
-            game_bar.set_description(str(seconds_remaining))
-            
-            # select a next event based on the probabilities
-            curr_table = probs[(probs['prev3'] == prev3) & (probs['prev2'] == prev2) & (probs['prev1'] == prev1)]
-            curr_event = np.random.choice(curr_table['curr_event'], p=curr_table['probability_avg'])
-            prev3, prev2, prev1 = prev2, prev1, curr_event
-            
-            # sample from the distribution of how long it takes for an
-            # event to occur, and upated the seconds_remaining
-            event_time = samples[i]
-            i += 1
-            seconds_remaining -= event_time
-            
-            # update the state dictionary
-            curr_dict['time_remaining'] = seconds_remaining
-            curr_dict[curr_event] += 1
-            game_dicts.append(curr_dict.copy())
-                
-        game_bar.update(1)
-            
-        # create this games dataframe and add it to the list of dataframes
-        last_game_states.append(curr_dict.copy())
+    save_stuff = {
+        'game_id': game_id,
+        'curr_game': curr_game,
+        'rows_to_simulate': rows_to_simulate,
+        'simulation_probabilities': simulation_probabilities
+    }
     
-    final_states_df = pd.DataFrame(last_game_states)
-    home_wins = np.sum(final_states_df['GOAL_HOME'] > final_states_df['GOAL_AWAY'])
-    home_prob = home_wins / n_games
-    away_prob = 1 - home_prob
-
-    return home_prob, away_prob
-
+    with open(f"data/pickles/simulation_probs_{game_id}.pickle", "wb") as f:
+        pickle.dump(save_stuff, f)
+        
+def simulate_games():
+    game_ids = [2022020839, 2023020412, 2022020727, 2022030154, 
+                2022021296, 2023020164, 2022020793, 2023020317, 
+                2022020971, 2022030145, 2022020938, 2022021300, 
+                2022021101, 2022020747, 2023020254, 2022020832, 
+                2022020842, 2022021012, 2023020268, 2022020867, 
+                2022030324, 2023020546, 2022021001, 2022021055, 
+                2023020464, 2022021181, 2023020096, 2022020688, 
+                2023020325, 2022021166, 2022020932, 2022020843, 
+                2023020365, 2022030245, 2022021040, 2022021088, 
+                2023020570, 2023020264, 2023020129, 2022020876, 
+                2023020292, 2023020010, 2022021270, 2022021115, 
+                2022020753, 2023020475, 2023020192, 2022020662, 
+                2023020033, 2023020482]
+    
+    already_done_game_ids = set()
+    
+    directory = "data/pickles"
+    for file_name in os.listdir(directory):
+        path = os.path.join(directory, file_name)
+        if os.path.exists(path) and "simulation_probs" in file_name:
+            game_id = int(file_name.split("_")[-1].split(".")[0])
+            already_done_game_ids.add(game_id)
+            
+    game_ids = [i for i in game_ids if i not in already_done_game_ids]
+    
+    mean_time = 10*60
+    times = []
+    for i, game_id in enumerate(game_ids):
+        n_left = len(game_ids) - i
+        time_left = (n_left * mean_time) / 60
+        print(game_id, f"({i+1}/{len(game_ids)}) ~{round(time_left, 2)} min left")
+        how_long = time.time()
+        get_game_probabilities(game_id)
+        how_long = time.time() - how_long
+        times.append(how_long)
+        
+        mean_time = np.mean(times)
+    
 if __name__ == "__main__":
-    args = sys.argv[1:]  # Read command-line arguments, excluding script name
-    if len(args) != 2:
-        print("Error: Please provide n_games and save_path arguments.")
-        print("Usage: python script.py n_games save_path")
+    simulate_games()
+    '''args = sys.argv[1:]  # Read command-line arguments, excluding script name
+    if len(args) != 1:
+        print("Error: Please provide game_id.")
+        print("Usage: python script.py game_Id")
     else:
         try:
-            n_games = int(args[0])
-            save_path = args[1]
-            simulate_games(n_games, save_path)
-        except ValueError:
-            print("Error: n_games must be an integer.")
+            game_id = int(args[0])
+            get_game_probabilities(game_id)
+        except Exception as e:
+            print(stack_trace(e))'''
         
     
             

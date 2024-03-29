@@ -1,6 +1,13 @@
 # NHL_Win_Predictor
 
 
+[ ] Results and analysis for XGBoost
+[ ] Results and analysis for MCMC
+[ ] Method for XGBoost
+[ ] Method and Results for Bayesian (Jason)
+[ ] Conclusion (Jason)
+
+
 # data
 
 This is an empty directory at the moment. I have added a .gitignore to ignore every single file in this directory, so if you absolutely want to make sure that something gets pushed to the GitHub, you will need to:
