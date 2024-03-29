@@ -136,8 +136,8 @@ penalties, and critical plays influencing game outcomes).
 % Images
 \begin{figure}[H]
     \centering
-    \subfigure[]{\includegraphics[width=0.9\textwidth]{images/good_xgb_example.png}} 
-    \subfigure[]{\includegraphics[width=0.9\textwidth]{images/good_xgb_example(2).png}} 
+    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example.png}} 
+    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example(2).png}} 
     \caption{For both of these plots, the home team is above the the 50\% line, with the
     away team below. The title has the final score of the game. \\
         \textbf{(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. 
@@ -239,7 +239,14 @@ simulation effectively emulates live NHL games.
 Overall, the Bayesian Network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
 then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian Network struggled to capture the intricate dependencies
 of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over probability calculation of goals and time reamining given historical data.
-We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game.
+We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game. A sample win probability graph is seen below in ~\ref{fig:bayesian_graph}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/good_bayesian_example.png}
+    \caption{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}
+    \label{fig:bayesian_graph}
+\end{figure}
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations. Here are some key points we want to address:
