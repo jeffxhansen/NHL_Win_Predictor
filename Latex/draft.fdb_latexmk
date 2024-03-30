@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex draft"] 1711750283 "draft.aux" "draft.bbl" "draft" 1711750284
+["bibtex draft"] 1711842862 "draft.aux" "draft.bbl" "draft" 1711842921
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "draft.aux" 1711750284 5673 7bc9fde4bf90fe223786c9308b660155 "pdflatex"
+  "draft.aux" 1711842921 5673 7bc9fde4bf90fe223786c9308b660155 "pdflatex"
   "references.bib" 1711720180 3148 7278608d386488cb389abd1a7ecdac79 ""
   (generated)
   "draft.bbl"
   "draft.blg"
-["pdflatex"] 1711750283 "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" "draft.pdf" "draft" 1711750284
-  "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" 1711750281 17683 cf236eaeefc11f998261fc276fa59bba ""
+["pdflatex"] 1711842920 "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" "draft.pdf" "draft" 1711842921
+  "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" 1711842919 17683 cf236eaeefc11f998261fc276fa59bba ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -184,10 +184,10 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1657121839 2826438 d9a24ea19c8bad2fba92bc4c553da93c ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "draft.aux" 1711750284 5673 7bc9fde4bf90fe223786c9308b660155 "pdflatex"
-  "draft.bbl" 1711750283 1397 5c82749b1a48cc27f54a7c16bdd1ad0d "bibtex draft"
-  "draft.out" 1711750284 1385 38079b77a0fa68a38edd85d7f3d281fd "pdflatex"
-  "draft.tex" 1711750281 17683 cf236eaeefc11f998261fc276fa59bba ""
+  "draft.aux" 1711842921 5673 7bc9fde4bf90fe223786c9308b660155 "pdflatex"
+  "draft.bbl" 1711842862 1397 5c82749b1a48cc27f54a7c16bdd1ad0d "bibtex draft"
+  "draft.out" 1711842921 1385 38079b77a0fa68a38edd85d7f3d281fd "pdflatex"
+  "draft.tex" 1711842919 17683 cf236eaeefc11f998261fc276fa59bba ""
   "images/good_bayesian_example.png" 1711750029 78903 9ac169209a97be6ad66b2d491418b57a ""
   "images/good_xgb_example(2).png" 1711741885 96323 a4487e4de7bf54f7c14b138430220e9c ""
   "images/good_xgb_example.png" 1711741710 105947 9a0e0b0cab8a40bac243d5afb4700844 ""
