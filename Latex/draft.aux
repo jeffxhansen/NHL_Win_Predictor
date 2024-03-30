@@ -1,2 +1,55 @@
 \relax 
-\gdef \@abspage@last{1}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{pishcedda}
+\citation{weissbock2013use}
+\citation{Weissbock2014ForecastingSI}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Problem Statement and Motivation}{1}{section.1}\protected@file@percent }
+\citation{hockeyR-data}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Data}{2}{section.2}\protected@file@percent }
+\citation{pmlr-vR0-chickering95a}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Bayesian Network}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}XGBoost}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}MCMC Game Simulation}{4}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:markov_chain_sample}{{1}{5}{Sample Markov Chain for the current state (home team won faceoff, home team lost puck, away team missed shot) with the probabilities of the next event sorted from highest to lowest}{figure.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Simulation Algorithm}}{5}{algorithm.1}\protected@file@percent }
+\newlabel{alg:monte_carlo_algorithm}{{1}{5}{MCMC Game Simulation}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Analysis}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Bayesian Network}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:bayesian_graph}{{2}{6}{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}XGBoost}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf  {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf  {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored.}}{7}{figure.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{7}{figure.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:xgboost_res}{{3}{7}{For both of these plots, the home team is above the the 50\% line, with the away team below. The title has the final score of the game. \\ \textbf {(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. Notice the probability shifts after one team scores a goal. \\ \textbf {(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets. Notice the stark changes in probabilities after each goal. Also notice the shift in probabilities even when no goals are scored}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}MCMC Simulator}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1500 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games. Note that we performed the t-SNE and UMAP on many different values of perplexity and neighbors, but all of the plots looked the same, so we just show this one}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:simulation_v_actual}{{4}{8}{PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1500 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games. Note that we performed the t-SNE and UMAP on many different values of perplexity and neighbors, but all of the plots looked the same, so we just show this one}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Method Comparison}{8}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Each of our model's predictive accuracy over the course of 50 games}}{9}{figure.5}\protected@file@percent }
+\newlabel{fig:game_accuracies}{{5}{9}{Each of our model's predictive accuracy over the course of 50 games}{figure.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Ethical Considerations}{9}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{10}{section.6}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{pmlr-vR0-chickering95a}{1}
+\bibcite{hockeyR-data}{2}
+\bibcite{pishcedda}{3}
+\bibcite{weissbock2013use}{4}
+\bibcite{Weissbock2014ForecastingSI}{5}
+\gdef \@abspage@last{11}

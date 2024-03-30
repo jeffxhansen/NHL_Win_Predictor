@@ -221,8 +221,7 @@ penalties, and critical plays influencing game outcomes).
     Notice the probability shifts after one team scores a goal.  \\
         \textbf{(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets.
         Notice the stark changes in probabilities after each goal. Also notice the
-        shift in probabilities even when no goals are scored. This suggests
-        the XGBoost model is able to pick up on momentum shifts.}
+        shift in probabilities even when no goals are scored.}
     \label{fig:xgboost_res}
 \end{figure}
 
@@ -277,8 +276,14 @@ Inaccurate predictions could lead a team to believe that the game is out of reac
 Overall, our predictions, like any, should not be considered declarative for gambling or performance purposes, but are rather an interesting exposition into the complexity of sporting events.
 
 
-\section{Conclusions}
-% Your content for this section goes here
+\section{Conclusion}
+
+In this project, we used three different methods to predict the outcomes of NHL games. We used a Bayesian Network to model the conditional dependencies of key features, XGBoost to model the play-by-play dynamics of each team, and an MCMC simulator to simulate the flow of events in a hockey game. We found that the MCMC simulator was the most accurate, with the Bayesian Network coming in second, and XGBoost coming in last. 
+The win percentages predicted are more for entertainment and educational purposes, and should not be used for gambling or performance purposes, as they do not have a incredibly high degree of accuracy. There are many variables in a hockey game that affect win probability, and given more time and more data we would love to model other factors such as momentum, historical success, coaching, etc. Our project was limited by the data
+we had access to and computational resources, but nonetheless we were able to produce a model that can predict the outcome of NHL games with a reasonable degree of accuracy.
+
+% new page
+\newpage
 
 % Bibliography
 \bibliographystyle{plain}
