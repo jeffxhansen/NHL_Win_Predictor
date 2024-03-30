@@ -7,3 +7,5 @@ data/*
 .DS_Store
 
 misc
+
+Latex/images/mcmC_*.*

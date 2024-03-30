@@ -101,6 +101,15 @@ def load_and_clean_csv(path):
     df.loc[df['home_skaters'] > df['away_skaters'], 'strength'] = 'Power Play'
     df.loc[df['home_skaters'] < df['away_skaters'], 'strength'] = 'Short Handed'
     
+    # make the Montreal Candiens name uniform without special characters
+    mc1 = "Montréal Canadiens"
+    mc2 = "MontrÃ©al Canadiens"
+    mc_actual = "Montreal Canadiens"
+    df.loc[df['home_name'] == mc1, 'home_name'] = mc_actual
+    df.loc[df['away_name'] == mc1, 'away_name'] = mc_actual
+    df.loc[df['home_name'] == mc2, 'home_name'] = mc_actual
+    df.loc[df['away_name'] == mc2, 'away_name'] = mc_actual
+    
     return df
 
 def load_clean_feather(year):
