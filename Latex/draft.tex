@@ -129,28 +129,52 @@ we felt this difference necessitated a model for each team.
 
 To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
 events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
-then the away team shot the puck and missed, the markov chain would look like figure~\ref{fig:markov_chain_sample}.
+then the away team shot the puck and missed, the markov chain would look like Table~\ref{tab:markov_chain_sample}.
 
-\begin{figure}[H]
+\begin{table}
     \centering
-    \includegraphics[width=0.8\textwidth]{images/markov_chain_sample.png}
-    \caption{Sample Markov Chain for the current state (home team won faceoff, 
-    home team lost puck, away team missed shot) with the probabilities of the next event 
-    sorted from highest to lowest}
-    \label{fig:markov_chain_sample}
-\end{figure}
+    \begin{tabular}{ |c|c| } 
+    \hline
+        \multicolumn{2}{|c|}{\textbf{Sample Markov Chain}} \\
+     \hline
+     \textit{Next Event} & \textit{Transition Probability} \\ 
+     \hline
+     Shot Away & 0.1853207 \\ 
+     \hline
+     Blocked Shot Away & 0.1138666 \\ 
+     \hline
+     \vdots & \vdots \\
+    \hline
+    Penalty Away & 0.0167210 \\
+    \hline
+    Goal Home & 0.0085793 \\
+    \hline
+    \end{tabular}
+    \caption{The transition events and probabilities when the previous three events were Faceoff Home, Giveaway Home, and Missed
+    Shot Away, respectively.}
+    \label{tab:markov_chain_sample}
+\end{table}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{images/markov_chain_sample.png}
+%     \caption{Sample Markov Chain for the current state (home team won faceoff, 
+%     home team lost puck, away team missed shot) with the probabilities of the next event 
+%     sorted from highest to lowest}
+%     % \label{fig:markov_chain_sample}
+% \end{figure}
 
 The probabilities of transitioning from one triple-state to another triple-state is calculated by:
 \begin{align*}
     P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
     &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
 \end{align*}
-Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that "A then 
-B then C then D" happened right after each other in a game.
+Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that ``A then 
+B then C then D'' happened right after each other in a game.
 
-To simulate a game, we performed this Monte Carlo algorithm that acted like a random walk through the Markov Chain (Note that the KDE\_times() is a KDE model fit on the amount of seconds that transpired between 
-each hockey event for all NHL games over the course of 13 years):
-\begin{algorithm}[H]
+To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm}) that acted like a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
+each hockey event for all NHL games over the course of 13 years).
+\begin{algorithm}
     \caption{Simulation Algorithm}
     \begin{algorithmic}[1]
         \State $\text{time\_remaining} \gets 3600$
@@ -189,9 +213,9 @@ $P(\text{away winning}) = 1-P(\text{home winning})$.
 Overall, the Bayesian Network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
 then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian Network struggled to capture the intricate dependencies
 of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over probability calculation of goals and time reamining given historical data.
-We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game. A sample win probability graph is seen below in ~\ref{fig:bayesian_graph}
+We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game. A sample win probability graph is seen below in Figure~\ref{fig:bayesian_graph}.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{images/good_bayesian_example.png}
     \caption{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}
@@ -205,13 +229,13 @@ approach is the ability to leverage the {\tt .predict\_proba()} method of XGBoos
 Using this method, we generated 
 probabilistic predictions at various stages of a game, allowing us to 
 plot the evolving probability of each team winning throughout the match
-(see~\ref{fig:xgboost_res}). 
+(see Figure~\ref{fig:xgboost_res}). 
 This approach provided insights into momentum shifts (when one team 
 has an advantage due to them having more players on the ice due to 
 a penalty by the opposing team), key moments (such as goals and 
 penalties, and critical plays influencing game outcomes).
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example.png}} 
     \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example(2).png}} 
@@ -237,11 +261,11 @@ the accuracies on the test set were 47.9\%, 48.5\%, 67.5\% and 69.3\% respective
 Second, we fit and transformed this dataset using PCA, t-SNE and UMAP 
 dimensionality reductions using various perplexity and neighbor hyperparameters to see 
 if these algorithms clustered the synthetic games and actual games in 
-different clusters. As shown below in ~\ref{fig:simulation_v_actual}, the simulated
+different clusters. As shown below in Figure~\ref{fig:simulation_v_actual}, the simulated
 games and actual games are all clustered together. From these two experiments, we conclude
 that our simulator effectively models live NHL games.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{images/pca_tsne_umap_sim_act.png}
     \caption{PCA, t-SNE, and UMAP performed on a dataset with final event counts for 1500 simulated and 1500 actual NHL games. The joined grouping demonstrates that our simulation accurately emulates live NHL games. Note that we performed the t-SNE and UMAP on many different values of perplexity and neighbors, but all of the plots looked the same, so we just show this one}
@@ -249,16 +273,43 @@ that our simulator effectively models live NHL games.
 \end{figure}
 
 \subsection{Method Comparison}
-Each of the methods described above had one general purpose: accurately predict the outcome of a hockey game regardless of the point in the game. To evaluate our models, we randomly selected 50 games outside of the training data, and for various time steps throughout these games we had each model calculate a win probability. We then used the probability threshold of 0.5 to determine whether or not each model predicted if the home team won or lost. We then computed each model's accuracy across all 50 games for each of the time steps.
+Each of the methods described above had one general purpose: accurately predict the outcome of a hockey game regardless of the point in the game. To evaluate our models, we randomly selected 100 games outside of the training data, and for various time steps throughout these games we had each model calculate a win probability. We then used the probability threshold of 0.5 to determine whether or not each model predicted if the home team won or lost. We then computed each model's accuracy across all 50 games for each of the time steps.
 
-\begin{figure}[H]
+\begin{table}
     \centering
-    \includegraphics[width=0.9\textwidth]{images/game_accuracies.png}
-    \caption{Each of our model's predictive accuracy over the course of 50 games}
-    \label{fig:game_accuracies}
-\end{figure}
+    \begin{tabular}{ |c|c|c|c| } 
+    \hline
+        \multicolumn{4}{|c|}{\textbf{Accuracy Comparison Between Models}} \\
+     \hline
+     \textit{Game Seconds Played} & \textit{MCMC} & \textit{XGBoost} & \textit{Bayesian} \\ 
+     \hline
+     0 & a & a & a \\ 
+     \hline
+     600 & a & a & a \\ 
+     \hline
+     1200 & a & a & a \\
+    \hline
+    1800 & a & a & a \\
+    \hline
+    2400 & a & a & a \\
+    \hline
+    3000 & a & a & a \\
+    \hline
+    3600 & a & a & a \\
+    \hline
+    \end{tabular}
+    \caption{Each of our model's predictive accuracy over the course of 100 games}
+    \label{tab:game_accuracies}
+\end{table}
 
-In figure ~\ref{fig:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{images/game_accuracies.png}
+%     \caption{Each of our model's predictive accuracy over the course of 50 games}
+%     \label{fig:game_accuracies}
+% \end{figure}
+
+In Figure~\ref{tab:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations relating to the fariness and integrity of the sport. We believe that the main ethical issue with our model is the potential for it to be used for gambling purposes. 
