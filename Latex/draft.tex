@@ -53,7 +53,7 @@ Each game in a season is given a unique identifier ({\tt game\_id}), which is co
 will be stored in the {\tt event\_type} column. There are 17 unique event types, including things such as game start, faceoff, shot, hit, and goal.
 Most of these event types are not relevant to our analysis, so we remove them from the dataset. After removing the unnecessary events, we are left with
 nine events: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
-team and player that performs the event. We only take into consideration the team that performs the event and discard the player information.
+team and player that perform the event. We only take into consideration the team that performs the event and discard the player information.
 
 The data also contains information about when the event occured. This appears in a variaty of formats, but we only
 use the {\tt game\_time\_remaining} column. {\tt game\_time\_remaining} starts
@@ -261,20 +261,18 @@ Each of the methods described above had one general purpose: accurately predict 
 In figure ~\ref{fig:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
 
 \section{Ethical Considerations}
-Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations. Here are some key points we want to address:
+Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations relating to the fariness and integrity of the sport. We believe that the main ethical issue with our model is the potential for it to be used for gambling purposes. 
+We do not condone the use of our model for gambling, and the purpose of our model is purely for educational and entertainment purposes. However, we recognize that the primary reason the the public uses sports predicting models is for gambling reasons.
 
-\begin{itemize}[label=\textbullet]
-\item \textbf{Gambling and Addiction}:
-Our win percentages and predictions might be used by those who wish to gamble, which could lead to addiction and financial harm, especially if undue trust in placed in these methods. Any publication of these methods or predictions would be accompanied by promoting healthy and responsible gambling practices.
-    
-\item \textbf{Fairness and Integrity of the Game}:
-Sometimes, coaches and players becoming aware of their chance of winning can affect how the game is played, potentially harming the integrity of the sport. We must be careful to not provide an unfair advantage to any team or player.
-Inaccurate predictions could lead a team to believe that the game is out of reach when it isn't, and we want to avoid that.
-            
-\end{itemize}
+The juxtaposition of our reasoning for completing this research and how we believe this research would be used is an interesting ethical dilemma. 
+One could argue that because our model will be used for gambling, we should not have released or published this work in the first place. 
+However, we believe that the technological and mathematical advancements that we have made in this project are valuable and should be shared with the public. 
+We also believe that the potential for our model to be used for gambling is not a reason to withhold our work from the public.
 
-Overall, our predictions, like any, should not be considered declarative for gambling or performance purposes, but are rather an interesting exposition into the complexity of sporting events.
+Gambling is harmful because it can lead to addiction, financial ruin, and other negative consequences. Gambling can also affect outcomes of games unfairly if players, coaches, owners, or referees illegally participate in gambling. Corrupt actors could create a destructive feedback loop using our predictions to gamble and then therefore influence the outcome of the game to match our predictions.
+We wish to make it clear that we are vehemently against sports gambling, and we support laws, policies, and practices that prevent gambling from negatively affecting sports and encourage healthy and responsible gambling practices.
 
+Additionally, there are no privacy concerns with our data as we only collected publicly availalbe NHL data.
 
 \section{Conclusion}
 
