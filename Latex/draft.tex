@@ -129,9 +129,9 @@ we felt this difference necessitated a model for each team.
 
 To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
 events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
-then the away team shot the puck and missed, the markov chain would look like Figure~\ref{fig:markov_chain_sample}.
+then the away team shot the puck and missed, the markov chain would look like Table~\ref{tab:markov_chain_sample}.
 
-\begin{figure}
+\begin{table}
     \centering
     \begin{tabular}{ |c|c| } 
     \hline
@@ -152,8 +152,8 @@ then the away team shot the puck and missed, the markov chain would look like Fi
     \end{tabular}
     \caption{The transition events and probabilities when the previous three events were Faceoff Home, Giveaway Home, and Missed
     Shot Away, respectively.}
-    \label{fig:markov_chain_sample}
-\end{figure}
+    \label{tab:markov_chain_sample}
+\end{table}
 
 % \begin{figure}[H]
 %     \centering
@@ -275,7 +275,7 @@ that our simulator effectively models live NHL games.
 \subsection{Method Comparison}
 Each of the methods described above had one general purpose: accurately predict the outcome of a hockey game regardless of the point in the game. To evaluate our models, we randomly selected 100 games outside of the training data, and for various time steps throughout these games we had each model calculate a win probability. We then used the probability threshold of 0.5 to determine whether or not each model predicted if the home team won or lost. We then computed each model's accuracy across all 50 games for each of the time steps.
 
-\begin{figure}
+\begin{table}
     \centering
     \begin{tabular}{ |c|c|c|c| } 
     \hline
@@ -299,8 +299,8 @@ Each of the methods described above had one general purpose: accurately predict 
     \hline
     \end{tabular}
     \caption{Each of our model's predictive accuracy over the course of 100 games}
-    \label{fig:game_accuracies}
-\end{figure}
+    \label{tab:game_accuracies}
+\end{table}
 
 % \begin{figure}[H]
 %     \centering
@@ -309,7 +309,7 @@ Each of the methods described above had one general purpose: accurately predict 
 %     \label{fig:game_accuracies}
 % \end{figure}
 
-In Figure~\ref{fig:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
+In Figure~\ref{tab:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations relating to the fariness and integrity of the sport. We believe that the main ethical issue with our model is the potential for it to be used for gambling purposes. 
