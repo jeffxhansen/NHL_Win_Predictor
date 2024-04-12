@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{Brooks-Davis}
+Jair Brooks-Davis.
+\newblock Why isn't hockey as popular as other sports? those who love the game
+  weigh in.
+\newblock 03 2022.
+
 \bibitem{pmlr-vR0-chickering95a}
 David~Maxwell Chickering, Dan Geiger, and David Heckerman.
 \newblock Learning bayesian networks: Search methods and experimental results.
@@ -15,6 +21,10 @@ Dan Morse.
   hockeyR package}.
 \newblock \url{https://github.com/danmorse314/hockeyR-data}, 2024.
 \newblock Accessed: March 2024.
+
+\bibitem{rinkstats_corsi_fenwick}
+Stephen Pettigrew.
+\newblock Why we should be trying to do better than corsi and fenwick, 05 2014.
 
 \bibitem{pishcedda}
 Gianni Pischedda.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  12 APR 2024 13:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  12 APR 2024 13:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -540,81 +540,86 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (1.07373pt too wide) in paragraph at lines 74--76
+Overfull \hbox (1.07373pt too wide) in paragraph at lines 75--77
 []\OT1/cmr/m/n/10.95 Bayesian net-works are prob-a-bilis-tic graph-i-cal mod-els that rep-re-sent prob-
  []
 
-[3] [4] [5
+[3] [4]
+Overfull \hbox (4.27791pt too wide) in paragraph at lines 207--212
+\OMS/cmsy/m/n/10.95 f[]g\OML/cmm/m/it/10.95 =\OT1/cmr/m/n/10.95 50$ and $\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([]) = 1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([])$. 
+ []
+
+[5
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.217 
+l.222 
       ]
-<images/good_bayesian_example.png, id=118, 722.7pt x 361.35pt>
+<images/good_bayesian_example.png, id=122, 722.7pt x 361.35pt>
 File: images/good_bayesian_example.png Graphic file (type png)
 <use images/good_bayesian_example.png>
-Package pdftex.def Info: images/good_bayesian_example.png  used on input line 220.
+Package pdftex.def Info: images/good_bayesian_example.png  used on input line 225.
 (pdftex.def)             Requested size: 323.9978pt x 161.99948pt.
  [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.237 
+l.242 
        <./images/good_bayesian_example.png>]
-<images/good_xgb_example.png, id=128, 609.9588pt x 325.215pt>
+<images/good_xgb_example.png, id=132, 609.9588pt x 325.215pt>
 File: images/good_xgb_example.png Graphic file (type png)
 <use images/good_xgb_example.png>
-Package pdftex.def Info: images/good_xgb_example.png  used on input line 240.
+Package pdftex.def Info: images/good_xgb_example.png  used on input line 245.
 (pdftex.def)             Requested size: 216.0022pt x 115.1668pt.
-<images/good_xgb_example(2).png, id=129, 609.9588pt x 325.215pt>
+<images/good_xgb_example(2).png, id=133, 609.9588pt x 325.215pt>
 File: images/good_xgb_example(2).png Graphic file (type png)
 <use images/good_xgb_example(2).png>
-Package pdftex.def Info: images/good_xgb_example(2).png  used on input line 241.
+Package pdftex.def Info: images/good_xgb_example(2).png  used on input line 246.
 (pdftex.def)             Requested size: 216.0022pt x 115.1668pt.
-<images/pca_tsne_umap_sim_act.png, id=131, 715.473pt x 286.671pt>
+<images/pca_tsne_umap_sim_act.png, id=135, 715.473pt x 286.671pt>
 File: images/pca_tsne_umap_sim_act.png Graphic file (type png)
 <use images/pca_tsne_umap_sim_act.png>
-Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 270.
+Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 275.
 (pdftex.def)             Requested size: 323.9978pt x 129.81436pt.
  [7] [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.309 
+l.314 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.309 
+l.314 
        <./images/good_xgb_example.png> <./images/good_xgb_example(2).png>] [9
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.318 
+l.323 
        <./images/pca_tsne_umap_sim_act.png>] [10] (./draft.bbl
-Underfull \hbox (badness 1057) in paragraph at lines 13--18
+Underfull \hbox (badness 1057) in paragraph at lines 19--24
 []\OT1/cmr/m/n/10.95 Dan Morse.  hockeyR-data: A col-lec-tion of hockey datasets for
  []
 
 ) [11]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 347.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 352.
  [12] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: 1C41007153A8287033084829AD3CBD49;1823.
  ) 
 Here is how much of TeX's memory you used:
- 21231 strings out of 478268
- 394813 string characters out of 5846348
- 654417 words of memory out of 5000000
- 39028 multiletter control sequences out of 15000+600000
+ 21235 strings out of 478268
+ 394897 string characters out of 5846348
+ 654496 words of memory out of 5000000
+ 39030 multiletter control sequences out of 15000+600000
  480150 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  100i,11n,104p,1145b,635s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on draft.pdf (12 pages, 889657 bytes).
+Output written on draft.pdf (12 pages, 890671 bytes).
 PDF statistics:
- 242 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 194 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
  145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

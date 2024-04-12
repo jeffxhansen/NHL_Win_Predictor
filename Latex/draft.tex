@@ -21,22 +21,23 @@ In the world of sports analytics, predicting the outcomes of games is a common a
 an extra layer of complexity. For most sports, there are a plethora of widely accepted—yet hidden—predictive models and methods that are used to
 predict games. In addition to this, most sports have easily accessible statistics and graphics that give current win probabilities for any live game.
 
-Hockey, however, is a different story. While there are some methods used to predict the outcome of National Hockey League (NHL) games, these models
+Hockey; however, is a different story. While there are some methods used to predict the outcome of National Hockey League (NHL) games, these models
 typically belong to sport books and their nuances are not publicly disclosed. Additionally, hockey analytics is not as
-developed as it is in other sports, such as basketball or baseball. This lack of model transparency and public interest in hockey analytics
+developed as it is in other sports, such as basketball or baseball~\cite{Brooks-Davis}. This lack of model transparency and public interest in hockey analytics
 makes predicting the outcomes of NHL games a very underdeveloped and challenging problem. Previous attempts and research into predicting NHL games
 has relied on methods such as decision trees and artificial neural networks~\cite{pishcedda} (from 2014), naïve bayes and support vector machines~\cite{weissbock2013use} (from 2013),
 and Monte Carlo simulations~\cite{Weissbock2014ForecastingSI} (from 2014).
 
-In addition to model research, some research has also gone into developing new features that can be used to better predict the game outcomes. 
+In addition to model research, some effort has also gone into developing new features that can be used to better predict the game outcomes. 
 The two biggest engineered classes of features are the Corsi
  and Fenwick\footnote{These metrics were created by sports bloggers Tim Barnes and Mark Fenwick, respectively. 
  We were unable to locate the original blog posts talking about these metrics, but a good article to learn more about the math can be
- found here \url{https://thehockeywriters.com/corsi-fenwick-stats-what-are-they/}.} metrics (both around 2007). 
+ found here \url{https://thehockeywriters.com/corsi-fenwick-stats-what-are-they/}.} metrics (both around 2007); however, we do not use these
+ in our approach because future research shows they do not improve model performance~\cite{rinkstats_corsi_fenwick}.
 
 Our project seeks a similar outcome to the research mentioned above: predict the outcomes of NHL games. Not only this,
-but we seek to provide live, acturate win probabilities for any given game state. Despite the simplicity of the problem statement, 
-as mentioned, the solution is not so straightforward. The NHL provides fast-paced games with many events
+but we seek to provide live, acturate, win probabilities for any given game state. Despite the simplicity of the problem statement, 
+the solution is not so straightforward. The NHL provides fast-paced games with many events
 occuring in quick succession. Our goal is to use this abundance of data and new approaches to build upon previous research.
 
 Our motivation for this project exists strictly as fans of the sport and as data scientists. Our model is not intended to be used for gambling or any other
@@ -50,9 +51,9 @@ which teams are playing, who is on the ice, and the final score of the game. The
 easy access and manipulation.
 
 Each game in a season is given a unique identifier ({\tt game\_id}), which is constant across all events in a game. Every event that occurs in a game
-will be stored in the {\tt event\_type} column. There are 17 unique event types, including things such as game start, faceoff, shot, hit, and goal.
+will be stored in the {\tt event\_type} column. There are 17 unique event types, including game start, faceoff, shot, hit, and goal.
 Most of these event types are not relevant to our analysis, so we remove them from the dataset. After removing the unnecessary events, we are left with
-nine events: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
+nine: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
 team and player that perform the event. We only take into consideration the team that performs the event and discard the player information to reduce noise and to avoid many one-hot encoded columns.
 
 The data also contains information about when the event occured. This appears in a variaty of formats, but we only
@@ -60,7 +61,7 @@ use the {\tt game\_time\_remaining} column. {\tt game\_time\_remaining} starts
 at 3600 (60 minutes) and counts down to 0. If the game goes into extra time, i.e., it is tied after 60 minutes, {\tt game\_time\_remaining} will
 be a negative value.
 
-We found that our data did not contain any missing values that was not easily explainable. For example, if a game is starting, there will be no
+We found that our data did not contain any missing values that were not easily explainable. For example, if a game is starting, there will be no
 events for penalties, which will result in a {\tt NaN} value in the penalties column. Additionally, any data that was confusing or not easily explainable
 (for example the home team having 7 players on the ice and the away team having 5), was manually verified by watching a clip of the game where
 the event occured to make sure the event was recorded correctly. We did not find any incorrectly recorded events, so we 
@@ -69,7 +70,7 @@ did not remove any strange events from out dataset.
 \section{Methods}
 
 \subsection{Bayesian Network}
-We first used a Bayesian Network to establish a benchmark for probability using several key features.
+We first used a Bayesian network to establish a benchmark for probability using several key features.
 
 Bayesian networks are probabilistic graphical models that represent probabilistic relationships among a set of variables using a directed acyclic graph (DAG). 
 In a Bayesian network, nodes represent random variables, and directed edges between nodes represent probabilistic dependencies between the variables. Each node in the graph is associated with a conditional probability distribution that quantifies the probability of that variable given its parent variables in the graph.
@@ -77,10 +78,9 @@ In a Bayesian network, nodes represent random variables, and directed edges betw
 For our purposes, we predefined the structure of the network, and used the data to calculate the conditional probabilities for each node. We then used the network to calculate the probability of a team winning given the current state of the game.
 
 The computational complexity of Bayesian Network inference is high, with exact inference being an NP-hard problem~\cite{pmlr-vR0-chickering95a}. 
-Using the python package pgmpy, we originally tried to fit a network with all 26 of our features, but our computational resources failed to fit this network.
+Using the python package {\tt pgmpy}, we originally tried to fit a network with all 26 of our features, but our computational resources failed to fit this network.
 Then, to get a baseline for our future predictions, we simply fitted the model with the base features of time remaining (tr), home goals (hg), away goals (ag), home shots (hs), away shots (as), home blocked shots (hbs), and away blocked shots (abs) in order to predict wins (w). 
 These features were chosen as priors because of our opinion that they are the most important to the game, based upon our knowledge of hockey.
-
 
 The conditional dependencies of the chosen network are shown in the DAG below:
 
@@ -124,11 +124,14 @@ because we felt it would be more accurate than a single model for all teams.
 This is because some teams do very well and some teams do very poorly, and
 we felt this difference necessitated a model for each team.
 
+XGBoost was chosen because of its ability to handle large datasets and model complex relationships between features. 
+XGBoost is able to attain a high degree of accuracy with a relatively small training time or overhead and was an ideal choice for our research.
+
 
 \subsection{MCMC Game Simulation}
 
 To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
-events that occurred. For example, if the home team won a faceoff, the home team lost the puck, and 
+events that occurred. For example, if the home team won a faceoff, lost the puck, and 
 then the away team shot the puck and missed, the markov chain would look like Table~\ref{tab:markov_chain_sample}.
 
 \begin{table}
@@ -172,7 +175,8 @@ The probabilities of transitioning from one triple-state to another triple-state
 Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that ``A then 
 B then C then D'' happened right after each other in a game.
 
-To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app}) that acted like a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
+To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app})
+that acts as a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
 each hockey event for all NHL games over the course of 13 years).
 % \begin{algorithm}
 %     \caption{Simulation Algorithm}
@@ -200,8 +204,9 @@ each hockey event for all NHL games over the course of 13 years).
 %     \label{alg:monte_carlo_algorithm}
 % \end{algorithm}
 
-To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states $(s_0, s_1, s_2)$ set to the most current events in the hockey game. By looking at each games
-final event counts, we could compute each game's winner. Then we computed the 
+To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states 
+$(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking at each games
+final event counts we compute the winner. We then compute the 
 probability as $P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$ and 
 $P(\text{away winning}) = 1-P(\text{home winning})$.
 
@@ -210,10 +215,10 @@ $P(\text{away winning}) = 1-P(\text{home winning})$.
 
 \subsection{Bayesian Network}
 
-Overall, the Bayesian Network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
-then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian Network struggled to capture the intricate dependencies
-of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over probability calculation of goals and time reamining given historical data.
-We see this in the probability graph below, where the changes in probability correspond to the goals scored in the game. A sample win probability graph is seen below in Figure~\ref{fig:bayesian_graph}.
+Overall, the Bayesian network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
+then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian network struggled to capture the intricate dependencies
+of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over all probability calculation of goals and time reamining given historical data.
+We see this in the probability graph in Figure~\ref{fig:bayesian_graph}, where the changes in probability correspond to the goals scored in the game. 
 
 \begin{figure}
     \centering

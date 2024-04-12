@@ -3,46 +3,49 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: draft.aux
 The style file: plain.bst
 Database file #1: references.bib
+Warning--entry type for "rinkstats_corsi_fenwick" isn't style-file defined
+--line 26 of file references.bib
+Warning--empty journal in Brooks-Davis
 Warning--empty booktitle in Weissbock2014ForecastingSI
-You've used 5 entries,
+You've used 7 entries,
             2118 wiz_defined-function locations,
-            534 strings with 5103 characters,
-and the built_in function-call counts, 1601 in all, are:
-= -- 151
-> -- 65
+            544 strings with 5331 characters,
+and the built_in function-call counts, 2005 in all, are:
+= -- 187
+> -- 79
 < -- 2
-+ -- 25
-- -- 20
-* -- 96
-:= -- 264
-add.period$ -- 18
-call.type$ -- 5
-change.case$ -- 24
++ -- 31
+- -- 24
+* -- 114
+:= -- 334
+add.period$ -- 23
+call.type$ -- 7
+change.case$ -- 32
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 69
-empty$ -- 144
-format.name$ -- 20
-if$ -- 346
+cite$ -- 9
+duplicate$ -- 86
+empty$ -- 183
+format.name$ -- 24
+if$ -- 429
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 4
-newline$ -- 30
-num.names$ -- 12
-pop$ -- 35
+int.to.str$ -- 7
+missing$ -- 5
+newline$ -- 39
+num.names$ -- 16
+pop$ -- 50
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 25
 quote$ -- 0
-skip$ -- 47
+skip$ -- 62
 stack$ -- 0
-substring$ -- 72
-swap$ -- 18
+substring$ -- 82
+swap$ -- 19
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 20
-warning$ -- 1
-while$ -- 15
-width$ -- 6
-write$ -- 59
-(There was 1 warning)
+type$ -- 28
+warning$ -- 2
+while$ -- 19
+width$ -- 8
+write$ -- 76
+(There were 3 warnings)
