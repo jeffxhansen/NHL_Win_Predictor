@@ -1,3 +1,38 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{pmlr-vR0-chickering95a}
+David~Maxwell Chickering, Dan Geiger, and David Heckerman.
+\newblock Learning bayesian networks: Search methods and experimental results.
+\newblock In Doug Fisher and Hans-Joachim Lenz, editors, {\em Pre-proceedings
+  of the Fifth International Workshop on Artificial Intelligence and
+  Statistics}, volume~R0 of {\em Proceedings of Machine Learning Research},
+  pages 112--128. PMLR, 04--07 Jan 1995.
+\newblock Reissued by PMLR on 01 May 2022.
+
+\bibitem{hockeyR-data}
+Dan Morse.
+\newblock {hockeyR-data: A collection of hockey datasets for use with the
+  hockeyR package}.
+\newblock \url{https://github.com/danmorse314/hockeyR-data}, 2024.
+\newblock Accessed: March 2024.
+
+\bibitem{pishcedda}
+Gianni Pischedda.
+\newblock Predicting nhl match outcomes with ml models.
+\newblock {\em International Journal of Computer Applications}, 101:15--22, 09
+  2014.
+
+\bibitem{weissbock2013use}
+Jason Weissbock, Herna Viktor, and Diana Inkpen.
+\newblock Use of performance metrics to forecast success in the national hockey
+  league.
+\newblock In {\em European Conference on Machine Learning: Sports Analytics and
+  Machine Learning Workshop}, 2013.
+
+\bibitem{Weissbock2014ForecastingSI}
+Josh Weissbock.
+\newblock Forecasting success in the national hockey league using in-game
+  statistics and textual data.
+\newblock 2014.
 
 \end{thebibliography}
