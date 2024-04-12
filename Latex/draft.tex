@@ -53,7 +53,7 @@ Each game in a season is given a unique identifier ({\tt game\_id}), which is co
 will be stored in the {\tt event\_type} column. There are 17 unique event types, including things such as game start, faceoff, shot, hit, and goal.
 Most of these event types are not relevant to our analysis, so we remove them from the dataset. After removing the unnecessary events, we are left with
 nine events: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
-team and player that perform the event. We only take into consideration the team that performs the event and discard the player information.
+team and player that perform the event. We only take into consideration the team that performs the event and discard the player information to reduce noise and to avoid many one-hot encoded columns.
 
 The data also contains information about when the event occured. This appears in a variaty of formats, but we only
 use the {\tt game\_time\_remaining} column. {\tt game\_time\_remaining} starts
@@ -273,32 +273,28 @@ that our simulator effectively models live NHL games.
 \end{figure}
 
 \subsection{Method Comparison}
-Each of the methods described above had one general purpose: accurately predict the outcome of a hockey game regardless of the point in the game. To evaluate our models, we randomly selected 100 games outside of the training data, and for various time steps throughout these games we had each model calculate a win probability. We then used the probability threshold of 0.5 to determine whether or not each model predicted if the home team won or lost. We then computed each model's accuracy across all 50 games for each of the time steps.
+Each of our methods had one general purpose: predict the winner of the game regardless of the point of the game. To evaluate our models, we randomly selected 100 games outside of the training data. To ensure that the test set represented the actual data, we selected the test set with 50 home wins and 50 away wins, and we also made sure there was an even representation of each of the 32 NHL teams. We then used each model to predict a winner at various points throughout each game. From these predictions on the 100 games, we computed each model's accuracy for each point in the game.
 
 \begin{table}
     \centering
-    \begin{tabular}{ |c|c|c|c| } 
+    \begin{tabular}{ |c|c|c|c|c| } 
     \hline
-        \multicolumn{4}{|c|}{\textbf{Accuracy Comparison Between Models}} \\
-     \hline
-     \textit{Game Seconds Played} & \textit{MCMC} & \textit{XGBoost} & \textit{Bayesian} \\ 
-     \hline
-     0 & a & a & a \\ 
-     \hline
-     600 & a & a & a \\ 
-     \hline
-     1200 & a & a & a \\
+    \textbf{Game Seconds} & \textbf{Game State} & \textbf{MCMC} & \textbf{XGBoost} & \textbf{Bayesian} \\ 
     \hline
-    1800 & a & a & a \\
+    0 & Q1 & 47\% & 56\% & 51\% \\ 
     \hline
-    2400 & a & a & a \\
+    900 & Q2 & 68\% & 55\% & 69\% \\
     \hline
-    3000 & a & a & a \\
+    1800 & Q3 & 73\% & 58\% & 69\% \\
     \hline
-    3600 & a & a & a \\
+    2700 & Q4 & 79\% & 77\% & 80\% \\
+    \hline
+    3540 & Last min of Q4 & 94\% & 86\% & 91\% \\
+    \hline
+     \(\sim \)3800 & OT & 96\% & 93\% & 100\% \\
     \hline
     \end{tabular}
-    \caption{Each of our model's predictive accuracy over the course of 100 games}
+    \caption{Results of each model's accuracy at various points throughout 100 games sampled from the test set}
     \label{tab:game_accuracies}
 \end{table}
 
@@ -309,7 +305,7 @@ Each of the methods described above had one general purpose: accurately predict 
 %     \label{fig:game_accuracies}
 % \end{figure}
 
-In Figure~\ref{tab:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy regardless of the point in the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator and the Bayesian Network tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The MCMC and Bayesian Network are structured to model the flow of events, so it appears that they picked up on a more predictive flow in how away teams play.
+In Figure~\ref{tab:game_accuracies} we note that each model increased in accuracy as the game progressed. We also notice that the MCMC simulation method appears to have the highest accuracy after the start of the game while XGBoost appears to be the least accurate. We infer that the XGBoost models were overfit, since they appeared to perform very well on games within the training set. Also, during experimentation with the models, we noticed that the MCMC simulator tended to produce higher probabilities for the away team winning, and the XGBoost model tended to give higher probabilities to the home team winning. The Bayesian Network was unbiased towards the home or away team. We trained the MCMC model on the flow of events in the game, so it appears that the model picked up on a more predictive flow in how away teams play. Though the MCMC model was generally the most accurate, it takes about 2 minutes to simulate 50 games and get a single prediction while XGBoost and the Bayesian Network can make a prediction in under two seconds.
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations relating to the fariness and integrity of the sport. We believe that the main ethical issue with our model is the potential for it to be used for gambling purposes. 
