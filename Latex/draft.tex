@@ -36,7 +36,7 @@ The two biggest engineered classes of features are the Corsi
  in our approach because future research shows they do not improve model performance~\cite{rinkstats_corsi_fenwick}.
 
 Our project seeks a similar outcome to the research mentioned above: predict the outcomes of NHL games. Not only this,
-but we seek to provide live, acturate, win probabilities for any given game state. Despite the simplicity of the problem statement, 
+but we seek to provide live, accurate, win probabilities for any given game state. Despite the simplicity of the problem statement, 
 the solution is not so straightforward. The NHL provides fast-paced games with many events
 occuring in quick succession. Our goal is to use this abundance of data and new approaches to build upon previous research.
 
@@ -67,7 +67,7 @@ events for penalties, which will result in a {\tt NaN} value in the penalties co
 the event occured to make sure the event was recorded correctly. We did not find any incorrectly recorded events, so we 
 did not remove any strange events from out dataset.
 
-The models were each trained on prior seasons, and tested on the most recent 2023-2024 season. This split was chosen because in practice our model would have access to historical data but not have access to the current season's data as it happens.
+The models were each trained on the 2021-2023 seasons (totaling two seasons), and tested on the most recent 2023-2024 season. This split was chosen because in practice our model would have access to historical data but not have access to the current season's data as it happens.
 
 \section{Methods}
 
@@ -134,7 +134,7 @@ XGBoost is able to attain a high degree of accuracy with a relatively small trai
 
 To simulate hockey games, we created a Markov Chain where the states are a tuple of three consecutive
 events that occurred. For example, if the home team won a faceoff, lost the puck, and 
-then the away team shot the puck and missed, the markov chain would look like Table~\ref{tab:markov_chain_sample}.
+then the away team shot the puck and missed, the next potential event in the Markov chain would look like Table~\ref{tab:markov_chain_sample}.
 
 \begin{table}
     \centering
@@ -177,8 +177,8 @@ The probabilities of transitioning from one triple-state to another triple-state
 Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that ``A then 
 B then C then D'' happened right after each other in a game.
 
-To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app})
-that acts as a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
+To simulate a game, we performed a Monte Carlo algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app})
+that acts as a random walk through the Markov chain (note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
 each hockey event for all NHL games over the course of 13 years).
 % \begin{algorithm}
 %     \caption{Simulation Algorithm}
@@ -217,7 +217,7 @@ $P(\text{away winning}) = 1-P(\text{home winning})$.
 
 \subsection{Bayesian Network}
 
-Overall, the Bayesian network performed well, and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
+Overall, the Bayesian network performed well and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
 then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian network struggled to capture the intricate dependencies
 of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over all probability calculation of goals and time reamining given historical data.
 We see this in the probability graph in Figure~\ref{fig:bayesian_graph}, where the changes in probability correspond to the goals scored in the game. 
@@ -263,7 +263,7 @@ the accuracies on the test set were 47.9\%, 48.5\%, 67.5\% and 69.3\% respective
 Second, we fit and transformed this dataset using PCA, t-SNE and UMAP 
 dimensionality reductions using various perplexity and neighbor hyperparameters to see 
 if these algorithms clustered the synthetic games and actual games in 
-different clusters. As shown below in Figure~\ref{fig:simulation_v_actual}, the simulated
+different clusters. As shown in Figure~\ref{fig:simulation_v_actual}, the simulated
 games and actual games are all clustered together. From these two experiments, we conclude
 that our simulator effectively models live NHL games.
 
@@ -275,7 +275,7 @@ that our simulator effectively models live NHL games.
 \end{figure}
 
 \subsection{Method Comparison}
-Each of our methods had one general purpose: predict the winner of the game regardless of the point of the game. 
+Each of our methods have one general purpose: predict the winner of the game regardless of the point of the game. 
 To evaluate our models, we randomly selected 100 games outside of the training data. 
 To ensure that the test set represented the actual data, we selected the test set with 50 home wins and 50 away wins, 
 and we also made sure there was an even representation of each of the 32 NHL teams. 
