@@ -67,7 +67,7 @@ events for penalties, which will result in a {\tt NaN} value in the penalties co
 the event occured to make sure the event was recorded correctly. We did not find any incorrectly recorded events, so we 
 did not remove any strange events from out dataset.
 
-The models were each trained on prior seasons, and tested on the most recent 2022-2023 season. This split was chosen because in practice our model would have access to historical data but not have access to the current season's data as it happens.
+The models were each trained on prior seasons, and tested on the most recent 2023-2024 season. This split was chosen because in practice our model would have access to historical data but not have access to the current season's data as it happens.
 
 \section{Methods}
 
@@ -224,7 +224,7 @@ We see this in the probability graph in Figure~\ref{fig:bayesian_graph}, where t
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{images/good_bayesian_example.png}
+    \includegraphics[width=\textwidth]{images/good_bayesian_example.png}
     \caption{Win probability graph using the Bayesian Network. As seen above, the win probability stayed rather stagnant until a goal was scored, where the probability shifted.}
     \label{fig:bayesian_graph}
 \end{figure}
@@ -243,15 +243,11 @@ penalties, and critical plays influencing game outcomes) than the Bayesian netwo
 
 \begin{figure}
     \centering
-    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example.png}} 
-    \subfigure[]{\includegraphics[width=0.6\textwidth]{images/good_xgb_example(2).png}} 
-    \caption{For both of these plots, the home team is above the the 50\% line, with the
-    away team below. The title has the final score of the game. \\
-        \textbf{(a)} The live win probabilities for the Nashville Predators at the Vegas Golden Knights. 
-    Notice the probability shifts after one team scores a goal.  \\
-        \textbf{(b)} The live win probabilities for the Calgary Flames at the Winnipeg Jets.
-        Notice the stark changes in probabilities after each goal. Also notice the
-        shift in probabilities even when no goals are scored.}
+    \includegraphics[width=\textwidth]{images/good_xgb_example.png}
+    \caption{We can see a high variance of win probability during this game. It is interesting to
+    see how a goal being scored impacts the win probability. It is also interesting to see how
+    the probability shifts without a goal being scored, implying the other events in the game
+    are important to the win probability.}
     \label{fig:xgboost_res}
 \end{figure}
 
@@ -323,7 +319,7 @@ Also, during experimentation with the models, we noticed that the MCMC simulator
 and the XGBoost model tended to give higher probabilities to the home team winning. 
 The Bayesian Network was unbiased towards the home or away team. 
 We trained the MCMC model on the flow of events in the game, so it appears that the model picked up on a more predictive flow in how away teams play. 
-Though the MCMC model was generally the most accurate, it takes about 2 minutes to simulate 50 games and get a single prediction while XGBoost and the Bayesian Network can make a prediction in under two seconds.
+Though the MCMC model was generally the most accurate, it takes about 2 minutes to simulate 50 games and get a single prediction while XGBoost and the Bayesian network can make a prediction in under two seconds.
 
 \section{Ethical Considerations}
 Predicting win percentages or outcomes in hockey games, like any sport, raises several ethical considerations relating to the fariness and integrity of the sport. We believe that the main ethical issue with our model is the potential for it to be used for gambling purposes. 
