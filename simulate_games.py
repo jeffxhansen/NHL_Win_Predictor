@@ -1,3 +1,6 @@
+import multiprocessing
+import concurrent
+
 import pandas as pd
 import pickle
 from tqdm import tqdm
@@ -5,9 +8,11 @@ import numpy as np
 import os
 import sys
 import time
-from jeffutils.utils import stack_trace
+from jeffutils.utils import stack_trace, str_to_list_py
 
 from py_files.simulator import get_simulation_prob
+
+start_time = time.time()
 
 def simulate_games(n_games:int, save_path:str):
     
@@ -125,7 +130,11 @@ def simulate_games(n_games:int, save_path:str):
 
     return games_full
 
-def get_game_probabilities(game_id):
+def get_game_probabilities(inpt):
+    
+    start = time.time()
+    
+    game_id, game_index_i, n_games = inpt
     
     df_full = pd.read_feather("data/play_by_play/play_by_play_full_state_space.feather")
     
@@ -163,7 +172,7 @@ def get_game_probabilities(game_id):
     for i, ind in enumerate(rows_to_simulate):
         inds = np.arange(max(0, ind-4), ind+1)
         curr_snapshot = state_portion.loc[inds, :].copy()
-        print("Seconds remaining:", curr_snapshot['game_seconds_remaining'].values[-1], f"({i+1}/{len(rows_to_simulate)})")
+        print(f"{game_id} ({game_index_i}/{n_games}) Seconds remaining:", curr_snapshot['game_seconds_remaining'].values[-1], f"({i+1}/{len(rows_to_simulate)})")
         
         home_prob, away_prob = get_simulation_prob(curr_snapshot, prob_mc, kde_seconds, verbose=True)
         simulation_probabilities.append((home_prob, away_prob))
@@ -177,6 +186,11 @@ def get_game_probabilities(game_id):
     
     with open(f"data/pickles/simulation_probs_{game_id}.pickle", "wb") as f:
         pickle.dump(save_stuff, f)
+        
+    global start_time
+    minutes_elapsed = (time.time() - start_time) / 60
+    curr_time = (time.time() - start) / 60
+    print(f"\n{game_index_i+1}/{n_games} total_min:{round(minutes_elapsed, 2)} curr_min:{round(curr_time, 2)}\n")
         
 def simulate_games():
     game_ids = [2022020839, 2023020412, 2022020727, 2022030154, 
@@ -193,8 +207,13 @@ def simulate_games():
                 2022020753, 2023020475, 2023020192, 2022020662, 
                 2023020033, 2023020482]
     
-    already_done_game_ids = set()
+    with open("data/test_game_ids.txt", 'r') as f:
+        test_game_ids_str = f.read()
+    game_ids = str_to_list_py(test_game_ids_str)
+    print(game_ids)
     
+    
+    already_done_game_ids = set()
     directory = "data/pickles"
     for file_name in os.listdir(directory):
         path = os.path.join(directory, file_name)
@@ -203,19 +222,119 @@ def simulate_games():
             already_done_game_ids.add(game_id)
             
     game_ids = [i for i in game_ids if i not in already_done_game_ids]
+    print(game_ids)
     
     mean_time = 10*60
     times = []
     for i, game_id in enumerate(game_ids):
         n_left = len(game_ids) - i
         time_left = (n_left * mean_time) / 60
+        print()
         print(game_id, f"({i+1}/{len(game_ids)}) ~{round(time_left, 2)} min left")
+        print()
         how_long = time.time()
         get_game_probabilities(game_id)
         how_long = time.time() - how_long
         times.append(how_long)
         
         mean_time = np.mean(times)
+        
+'''
+    if self.verbose_mode or show_pbar:
+        pbar = tqdm(total=len(strategies), desc='Backtests(multi)', leave=False, position=2)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_pool_size) as executor:
+        futures = [executor.submit(iterative_backtest_thread, i, inpt_version, self.ret_values, walkforward_group)
+                for i, inpt_version in enumerate(strategies)]
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                data = future.result()
+                if data is not None:
+                    L.append(data)
+                if self.verbose_mode or show_pbar:
+                    pbar.update(1)
+            except Exception as exc:
+                print(exc)
+
+'''
+        
+def simulate_games_concur():
+    
+    with open("data/test_game_ids.txt", 'r') as f:
+        test_game_ids_str = f.read()
+    game_ids = str_to_list_py(test_game_ids_str)
+    
+    already_done_game_ids = set()
+    directory = "data/pickles"
+    for file_name in os.listdir(directory):
+        path = os.path.join(directory, file_name)
+        if os.path.exists(path) and "simulation_probs" in file_name:
+            game_id = int(file_name.split("_")[-1].split(".")[0])
+            already_done_game_ids.add(game_id)
+            
+    game_ids = [i for i in game_ids if i not in already_done_game_ids]
+        
+    mean_time = 10*60
+    times = []
+    i = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+        futures = [executor.submit(get_game_probabilities, game_id) for game_id in game_ids]
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                n_left = len(game_ids) - i
+                time_left = (n_left * mean_time) / 60
+                print()
+                print(game_id, f"({i+1}/{len(game_ids)}) ~{round(time_left, 2)} min left")
+                print()
+                
+                data = future.result()
+                
+                how_long = time.time()
+                get_game_probabilities(game_id)
+                how_long = time.time() - how_long
+                times.append(how_long)
+                
+                mean_time = np.mean(times)
+                
+                i += 1
+            except Exception as exc:
+                print(exc)
+                
+def simulate_games_multi():
+    
+    with open("data/test_game_ids.txt", 'r') as f:
+        test_game_ids_str = f.read()
+    game_ids = str_to_list_py(test_game_ids_str)
+    
+    already_done_game_ids = set()
+    directory = "data/pickles"
+    for file_name in os.listdir(directory):
+        path = os.path.join(directory, file_name)
+        if os.path.exists(path) and "simulation_probs" in file_name:
+            game_id = int(file_name.split("_")[-1].split(".")[0])
+            already_done_game_ids.add(game_id)
+            
+    game_ids = [i for i in game_ids if i not in already_done_game_ids]
+    game_ids_is = [(gi, i, len(game_ids)) for i, gi in enumerate(game_ids)]
+        
+    # Number of processes to use (adjust as needed)
+    num_processes = 8
+
+    # Create a pool of processes
+    pool = multiprocessing.Pool(processes=num_processes)
+
+    # Use pool.map to distribute tasks across processes
+    results = pool.map(get_game_probabilities, game_ids_is)
+
+    # Close the pool after use
+    pool.close()
+    pool.join()
+
+    # Process results (optional)
+    for result in results:
+        print(result)
+
+    
     
 if __name__ == "__main__":
     simulate_games()
