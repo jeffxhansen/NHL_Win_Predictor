@@ -172,33 +172,33 @@ The probabilities of transitioning from one triple-state to another triple-state
 Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,D) represents that ``A then 
 B then C then D'' happened right after each other in a game.
 
-To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm}) that acted like a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
+To simulate a game, we performed this Monte Carlo Algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app}) that acted like a random walk through the Markov Chain (Note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
 each hockey event for all NHL games over the course of 13 years).
-\begin{algorithm}
-    \caption{Simulation Algorithm}
-    \begin{algorithmic}[1]
-        \State $\text{time\_remaining} \gets 3600$
-        \Comment{NHL games are 3600 seconds}
-        \State $s_0 \gets "\#"$
-        \Comment{The "\#" symbol represents the start of a game}
-        \State $s_1 \gets "\#"$
-        \State $s_2 \gets "\#"$
-        \State $\text{event\_counts} \gets \text{dictionary()}$
+% \begin{algorithm}
+%     \caption{Simulation Algorithm}
+%     \begin{algorithmic}[1]
+%         \State $\text{time\_remaining} \gets 3600$
+%         \Comment{NHL games are 3600 seconds}
+%         \State $s_0 \gets "\#"$
+%         \Comment{The "\#" symbol represents the start of a game}
+%         \State $s_1 \gets "\#"$
+%         \State $s_2 \gets "\#"$
+%         \State $\text{event\_counts} \gets \text{dictionary()}$
 
-        \While{$\text{time\_remaining} > 0$}
-            \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
-            \State $\text{event\_counts}[\text{next\_state}] \mathrel{+}= 1$
+%         \While{$\text{time\_remaining} > 0$}
+%             \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
+%             \State $\text{event\_counts}[\text{next\_state}] \mathrel{+}= 1$
             
-            \State $s_0 \gets s_1$
-            \State $s_1 \gets s_2$
-            \State $s_2 \gets \text{next\_state}$
+%             \State $s_0 \gets s_1$
+%             \State $s_1 \gets s_2$
+%             \State $s_2 \gets \text{next\_state}$
 
-            \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
-            \State $\text{time\_remaining} \gets (\text{time\_remaining} - \text{event\_time})$
-        \EndWhile
-    \end{algorithmic}
-    \label{alg:monte_carlo_algorithm}
-\end{algorithm}
+%             \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
+%             \State $\text{time\_remaining} \gets (\text{time\_remaining} - \text{event\_time})$
+%         \EndWhile
+%     \end{algorithmic}
+%     \label{alg:monte_carlo_algorithm}
+% \end{algorithm}
 
 To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states $(s_0, s_1, s_2)$ set to the most current events in the hockey game. By looking at each games
 final event counts, we could compute each game's winner. Then we computed the 
@@ -333,6 +333,43 @@ we had access to and computational resources, but nonetheless we were able to pr
 % Bibliography
 \bibliographystyle{plain}
 \bibliography{references} % Replace 'references' with the name of your .bib file
+
+\newpage
+
+
+\section*{Appendix}
+
+\appendix
+\section{MCMC Sampling Algorithm}
+\label{mcmc_app}
+
+\begin{algorithm}
+    \caption{Simulation Algorithm}
+    \begin{algorithmic}[1]
+        \State $\text{time\_remaining} \gets 3600$
+        \Comment{NHL games are 3600 seconds}
+        \State $s_0 \gets "\#"$
+        \Comment{The "\#" symbol represents the start of a game}
+        \State $s_1 \gets "\#"$
+        \State $s_2 \gets "\#"$
+        \State $\text{event\_counts} \gets \text{dictionary()}$
+
+        \While{$\text{time\_remaining} > 0$}
+            \State $\text{next\_state} \gets \text{sample from } \text{MC(curr\_state)}$
+            \State $\text{event\_counts}[\text{next\_state}] \mathrel{+}= 1$
+            
+            \State $s_0 \gets s_1$
+            \State $s_1 \gets s_2$
+            \State $s_2 \gets \text{next\_state}$
+
+            \State $\text{event\_time} \gets \text{sample from } \text{KDE\_times()}$
+            \State $\text{time\_remaining} \gets (\text{time\_remaining} - \text{event\_time})$
+        \EndWhile
+    \end{algorithmic}
+    \label{alg:monte_carlo_algorithm}
+\end{algorithm}
+
+
 
 \end{document}
 
