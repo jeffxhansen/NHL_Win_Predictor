@@ -1,8 +1,3 @@
----
-header-includes:
-  - \usepackage{algorithm2e}
----
-
 # Puck Predictions: Unraveling the NHL Game Forecasting Riddle
 
 **Authors:** Jeff Hansen, Benjamin McMullin, Dylan Skinner, Jason Vasquez
