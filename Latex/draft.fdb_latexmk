@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex draft"] 1713021749 "draft.aux" "draft.bbl" "draft" 1713021900
+["bibtex draft"] 1713021749 "draft.aux" "draft.bbl" "draft" 1713060863
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "draft.aux" 1713021900 6027 e12721cf0591b8604926768dd9b7ad25 "pdflatex"
+  "draft.aux" 1713060863 6027 e12721cf0591b8604926768dd9b7ad25 "pdflatex"
   "references.bib" 1712950465 3740 f5a08cba276755759d715804fe49733d ""
   (generated)
   "draft.bbl"
   "draft.blg"
-["pdflatex"] 1713021898 "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" "draft.pdf" "draft" 1713021900
+["pdflatex"] 1713060862 "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" "draft.pdf" "draft" 1713060863
   "/Users/dylanskinner/Desktop/ACME_Projects/NHL_Win_Predictor/Latex/draft.tex" 1713021898 24599 2110416d5bd8f12032a923f810d5a73d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -181,9 +181,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1657121839 2826438 d9a24ea19c8bad2fba92bc4c553da93c ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "draft.aux" 1713021900 6027 e12721cf0591b8604926768dd9b7ad25 "pdflatex"
+  "draft.aux" 1713060863 6027 e12721cf0591b8604926768dd9b7ad25 "pdflatex"
   "draft.bbl" 1713021749 1684 ff44f3b87c0caadba6309bf8bf5961e1 "bibtex draft"
-  "draft.out" 1713021900 1823 1c41007153a8287033084829ad3cbd49 "pdflatex"
+  "draft.out" 1713060863 1823 1c41007153a8287033084829ad3cbd49 "pdflatex"
   "draft.tex" 1713021898 24599 2110416d5bd8f12032a923f810d5a73d ""
   "images/good_bayesian_example.png" 1712956592 95621 a20c64da7a6778f4e0cb669e0af50bc7 ""
   "images/good_xgb_example.png" 1712956011 114886 2f174575ab654d65f7bc8c4b5da254be ""
