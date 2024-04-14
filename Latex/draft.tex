@@ -12,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-    The goal of this project is simple: predict the outcomes of NHL games from any given state during the game. To solve this problem we use three primary methods: Bayesian Network to train a DAG, XGBoost on game states, and an MCMC game simulator. We use each of these methods to generate win probabilities for each time step throughout various NHL games, thus emulating a live win probability. Finally, we analyze the accuracy of these three methods and considered ethical implications of our results.
+    The goal of this project is simple: predict the outcomes of NHL games from any given state during the game. To solve this problem we use three primary methods: Bayesian Network to train a DAG, XGBoost on game states, and an MCMC game simulator. We use each of these methods to generate win probabilities for each time step throughout various NHL games, thus emulating a live win probability. Finally, we analyze the accuracy of these three methods and consider ethical implications of our results.
 \end{abstract}
 
 \section{Problem Statement and Motivation}
@@ -24,7 +24,7 @@ predict games. In addition to this, most sports have easily accessible statistic
 Hockey; however, is a different story. While there are some methods used to predict the outcome of National Hockey League (NHL) games, these models
 typically belong to sport books and their nuances are not publicly disclosed. Additionally, hockey analytics is not as
 developed as it is in other sports, such as basketball or baseball~\cite{Brooks-Davis}. This lack of model transparency and public interest in hockey analytics
-makes predicting the outcomes of NHL games a very underdeveloped and challenging problem. Previous attempts and research into predicting NHL games
+makes predicting the outcomes of NHL games a very underdeveloped and challenging problem. Previous attempts and research in predicting NHL games
 has relied on methods such as decision trees and artificial neural networks~\cite{pishcedda} (from 2014), naïve bayes and support vector machines~\cite{weissbock2013use} (from 2013),
 and Monte Carlo simulations~\cite{Weissbock2014ForecastingSI} (from 2014).
 
@@ -45,20 +45,16 @@ nefarious purposes—any use of this model for such purposes is a misuse of our 
 
 \section{Data}
 % Your content for this section goes here
-Our data came from the hockeyR Github repository~\cite{hockeyR-data}. This repository contains an abundance of data about every NHL game
+Our data comes from the hockeyR Github repository~\cite{hockeyR-data}. This repository contains an abundance of data about every NHL game
 that has occured since the 2010-11 season. This data includes information about the events that transpire in a game (hits, shots, goals, etc.),
 which teams are playing, who is on the ice, and the final score of the game. The data is stored in a series of {\tt .csv.gz} files, allowing for
 easy access and manipulation.
 
-Each game in a season is given a unique identifier ({\tt game\_id}), which is constant across all events in a game. Every event that occurs in a game
-will be stored in the {\tt event\_type} column. There are 17 unique event types, including game start, faceoff, shot, hit, and goal.
-Most of these event types are not relevant to our analysis, so we remove them from the dataset. After removing the unnecessary events, we are left with
-nine: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
-team and player that perform the event. We only take into consideration the team that performs the event and discard the player information to reduce noise and to avoid many one-hot encoded columns.
+Each game in a season has a unique identifier ({\tt game\_id}), which is constant across all events in a game. Every event that occurs in a game is stored in the {\tt event\_type} column. Most of the 17 unique event types are not relevant to our analysis, so we only include the prominent ones: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. We also leave out the player information for each event to reduce noise and to avoid many one-hot encoded columns.
 
-The data also contains information about when the event occured. This appears in a variaty of formats, but we only
+The data also contains information about when the event occurred. This appears in a variety of formats, but we only
 use the {\tt game\_time\_remaining} column. {\tt game\_time\_remaining} starts
-at 3600 (60 minutes) and counts down to 0. If the game goes into extra time, i.e., it is tied after 60 minutes, {\tt game\_time\_remaining} will
+at 3600 (60 minutes) and counts down to 0. If the game goes into extra time (i.e. it is tied after 60 minutes), {\tt game\_time\_remaining} will
 be a negative value.
 
 We found that our data did not contain any missing values that were not easily explainable. For example, if a game is starting, there will be no
@@ -67,7 +63,7 @@ events for penalties, which will result in a {\tt NaN} value in the penalties co
 the event occured to make sure the event was recorded correctly. We did not find any incorrectly recorded events, so we 
 did not remove any strange events from out dataset.
 
-The models were each trained on the 2021-2023 seasons (totaling two seasons), and tested on the most recent 2023-2024 season. This split was chosen because in practice our model would have access to historical data but not have access to the current season's data as it happens.
+The models were each trained on the 2021-2023 seasons (totaling two seasons), and tested on the most recent 2023-2024 season. This split ensures that the models use the most relevant data for training while still leaving the most recent season as testing to simulate live prediction probabilities.
 
 \section{Methods}
 
@@ -178,8 +174,8 @@ Where $A,B,C,D$ represent events that can occur in a game, and the tuple (A,B,C,
 B then C then D'' happened right after each other in a game.
 
 To simulate a game, we performed a Monte Carlo algorithm (see Algorithm~\ref{alg:monte_carlo_algorithm} in Appendix~\ref{mcmc_app})
-that acts as a random walk through the Markov chain (note that the {\tt KDE\_times()} is a KDE model fit on the amount of seconds that transpired between 
-each hockey event for all NHL games over the course of 13 years).
+that acts as a random walk through the Markov chain. Note that the {\tt KDE\_times()} in the algorithm is a KDE model fit on the amount of seconds that transpired between 
+each hockey event for all NHL games over the course of 13 years.
 % \begin{algorithm}
 %     \caption{Simulation Algorithm}
 %     \begin{algorithmic}[1]
@@ -206,9 +202,8 @@ each hockey event for all NHL games over the course of 13 years).
 %     \label{alg:monte_carlo_algorithm}
 % \end{algorithm}
 
-To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states 
-$(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking at each games
-final event counts we compute the winner. We then compute the 
+To predict a team's winning probability, we simulate 50 hockey games with the initial starting states 
+$(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking at each game's final event counts, we compute the winner. We then compute the 
 probability as $P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$ and 
 $P(\text{away winning}) = 1-P(\text{home winning})$.
 
@@ -218,8 +213,7 @@ $P(\text{away winning}) = 1-P(\text{home winning})$.
 \subsection{Bayesian Network}
 
 Overall, the Bayesian network performed well and was able to produce realistic win probabilities. Because it defined a joint distribution using a DAG and
-then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian network struggled to capture the intricate dependencies
-of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over all probability calculation of goals and time reamining given historical data.
+then used that distribution to fit the data, it was able to correctly predict accuracies using the few features provided. However, the Bayesian network struggled to capture the intricate dependencies of factors other than goals that could affect the win probabilities, so the predicted probabilities are little more than an over all probability calculation of goals and time remaining given historical data.
 We see this in the probability graph in Figure~\ref{fig:bayesian_graph}, where the changes in probability correspond to the goals scored in the game. 
 
 \begin{figure}
