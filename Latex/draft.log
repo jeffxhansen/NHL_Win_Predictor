@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  13 APR 2024 20:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.6)  13 APR 2024 21:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -540,12 +540,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (1.07373pt too wide) in paragraph at lines 77--79
+Overfull \hbox (1.07373pt too wide) in paragraph at lines 73--75
 []\OT1/cmr/m/n/10.95 Bayesian net-works are prob-a-bilis-tic graph-i-cal mod-els that rep-re-sent prob-
  []
 
 [3] [4]
-Overfull \hbox (4.27791pt too wide) in paragraph at lines 209--214
+Overfull \hbox (4.27791pt too wide) in paragraph at lines 205--209
 \OMS/cmsy/m/n/10.95 f[]g\OML/cmm/m/it/10.95 =\OT1/cmr/m/n/10.95 50$ and $\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([]) = 1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 ([])$. 
  []
 
@@ -553,52 +553,52 @@ Overfull \hbox (4.27791pt too wide) in paragraph at lines 209--214
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
+l.218 
       ]
 <images/good_bayesian_example.png, id=122, 624.4128pt x 325.215pt>
 File: images/good_bayesian_example.png Graphic file (type png)
 <use images/good_bayesian_example.png>
-Package pdftex.def Info: images/good_bayesian_example.png  used on input line 227.
+Package pdftex.def Info: images/good_bayesian_example.png  used on input line 221.
 (pdftex.def)             Requested size: 360.0pt x 187.49837pt.
  [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.243 
+l.237 
        <./images/good_bayesian_example.png>]
 <images/good_xgb_example.png, id=131, 624.4128pt x 325.215pt>
 File: images/good_xgb_example.png Graphic file (type png)
 <use images/good_xgb_example.png>
-Package pdftex.def Info: images/good_xgb_example.png  used on input line 246.
+Package pdftex.def Info: images/good_xgb_example.png  used on input line 240.
 (pdftex.def)             Requested size: 360.0pt x 187.49837pt.
  [7
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.269 
+l.263 
        <./images/good_xgb_example.png>]
 <images/pca_tsne_umap_sim_act.png, id=140, 715.473pt x 286.671pt>
 File: images/pca_tsne_umap_sim_act.png Graphic file (type png)
 <use images/pca_tsne_umap_sim_act.png>
-Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 272.
+Package pdftex.def Info: images/pca_tsne_umap_sim_act.png  used on input line 266.
 (pdftex.def)             Requested size: 323.9978pt x 129.81436pt.
  [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.323 
+l.317 
        <./images/pca_tsne_umap_sim_act.png>] [9
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.332 
+l.329 
       ] [10] (./draft.bbl
 Underfull \hbox (badness 1057) in paragraph at lines 19--24
 []\OT1/cmr/m/n/10.95 Dan Morse.  hockeyR-data: A col-lec-tion of hockey datasets for
  []
 
 ) [11]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 362.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 356.
  [12] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: 1C41007153A8287033084829AD3CBD49;1823.
@@ -606,13 +606,13 @@ Package rerunfilecheck Info: File `draft.out' has not changed.
 Here is how much of TeX's memory you used:
  21225 strings out of 478268
  394628 string characters out of 5846348
- 652302 words of memory out of 5000000
+ 653302 words of memory out of 5000000
  39023 multiletter control sequences out of 15000+600000
  480150 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,11n,104p,600b,635s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,11n,104p,601b,635s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on draft.pdf (12 pages, 828578 bytes).
+Output written on draft.pdf (12 pages, 828253 bytes).
 PDF statistics:
  242 PDF objects out of 1000 (max. 8388607)
  192 compressed objects within 2 object streams
