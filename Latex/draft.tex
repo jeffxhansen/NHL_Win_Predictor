@@ -44,8 +44,7 @@ nefarious purposes—any use of this model for such purposes is a misuse of our 
 
 \section{Data}
 % Your content for this section goes here
-Our data came from the hockeyR Github repository~\cite{hockeyR-data}. This repository contains an abundance of data about every NHL game
-that has occured since the 2010-11 season. This data includes information about the events that transpire in a game (hits, shots, goals, etc.),
+Our data came from the hockeyR Github repository~\cite{hockeyR-data}. With data starting in the 2010-2011 season, this dataset contains events that transpire in a game (hits, shots, goals, etc.),
 which teams are playing, who is on the ice, and the final score of the game. The data is stored in a series of {\tt .csv.gz} files, allowing for
 easy access and manipulation.
 
@@ -53,7 +52,8 @@ Each game in a season is given a unique identifier ({\tt game\_id}), which is co
 will be stored in the {\tt event\_type} column. There are 17 unique event types, including things such as game start, faceoff, shot, hit, and goal.
 Most of these event types are not relevant to our analysis, so we remove them from the dataset. After removing the unnecessary events, we are left with
 nine events: blocked shot, faceoff, giveaway, goal, hit, missed shot, penalty, shot, and takeaway. These events are attributed to the
-team and player that perform the event. We only take into consideration the team that performs the event and discard the player information to reduce noise and to avoid many one-hot encoded columns.
+team and player that perform the event, but we only take into consideration the team that performs the event and discard the player information to reduce 
+noise and to avoid many one-hot encoded columns.
 
 The data also contains information about when the event occured. This appears in a variaty of formats, but we only
 use the {\tt game\_time\_remaining} column. {\tt game\_time\_remaining} starts
