@@ -152,7 +152,7 @@ $(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking a
 final event counts we compute the winner. We then compute the 
 probability as 
 
-$P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$ 
+$$P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$$
 
 and 
 
