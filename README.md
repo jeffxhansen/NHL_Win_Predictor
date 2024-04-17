@@ -150,12 +150,7 @@ each hockey event for all NHL games over the course of 13 years).
 To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states 
 $(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking at each games
 final event counts we compute the winner. We then compute the 
-probability as 
-
-$$P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$$
-
-and 
-
+probability as $P(\text{home winning}) = \{\text{number home simulation wins}\}/50$ and 
 $P(\text{away winning}) = 1-P(\text{home winning})$.
 
 ## Results and Analysis
