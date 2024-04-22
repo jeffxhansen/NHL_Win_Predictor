@@ -136,10 +136,14 @@ then the away team shot the puck and missed, the next potential event in the Mar
 </div>
 
 The probabilities of transitioning from one triple-state to another triple-state is calculated by:
-$$\begin{aligned}
+
+$$
+\begin{aligned}
     P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
     &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
-\end{aligned}$$
+\end{aligned}
+$$
+
 Where $A,B,C,D$ represent events that can occur in a game, and the tuple $(A,B,C,D)$ represents that "$A$ then 
 $B$ then $C$ then $D$" happened right after each other in a game.
 
