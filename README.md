@@ -140,7 +140,7 @@ The probabilities of transitioning from one triple-state to another triple-state
 $$
 \begin{aligned}
     P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
-    &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
+    &= \frac{\{ \text{number of times (A,B,C,D) happend}\}}{\{ \text{number of times (A,B,C) happened}\}} \\
 \end{aligned}
 $$
 
