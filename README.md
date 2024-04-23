@@ -136,10 +136,14 @@ then the away team shot the puck and missed, the next potential event in the Mar
 </div>
 
 The probabilities of transitioning from one triple-state to another triple-state is calculated by:
-$$\begin{aligned}
-    P(s_{t+1} = (B,C,D) \;|\; s_t = (A,B,C)) &= P(D \;|\; (A,B,C)) \\
-    &= \frac{\{ \text{\# of times (A,B,C,D) happend}\}}{\{ \text{\# of times (A,B,C) happened}\}} \\
-\end{aligned}$$
+
+$$
+\begin{aligned}
+    P(s_{t+1} = (B,C,D) | s_t = (A,B,C)) &= P(D | (A,B,C)) \\
+    &= \frac{\{ \text{number of times (A,B,C,D) happend}\}}{\{ \text{number of times (A,B,C) happened}\}} \\
+\end{aligned}
+$$
+
 Where $A,B,C,D$ represent events that can occur in a game, and the tuple $(A,B,C,D)$ represents that "$A$ then 
 $B$ then $C$ then $D$" happened right after each other in a game.
 
@@ -150,7 +154,7 @@ each hockey event for all NHL games over the course of 13 years).
 To predict a team's winning probability, we would simulate 50 hockey games with the initial starting states 
 $(s_0, s_1, s_2)$ set to the most recent events in the hockey game. By looking at each games
 final event counts we compute the winner. We then compute the 
-probability as $P(\text{home winning}) = \{\text{\# home simulation wins}\}/50$ and 
+probability as $P(\text{home winning}) = \{\text{number home simulation wins}\}/50$ and 
 $P(\text{away winning}) = 1-P(\text{home winning})$.
 
 ## Results and Analysis
