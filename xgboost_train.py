@@ -160,7 +160,7 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         'lambda': [0.98],
         'eval_metric': ['logloss'],
         'device': ['cuda'],
-        'client': [client]
+        # 'client': [client]
         }
     
     # Define cross-validation strategy
