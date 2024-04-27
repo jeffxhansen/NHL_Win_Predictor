@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import pickle
-from sklearn.model_selection import train_test_split, StratifiedKFold
+from sklearn.model_selection import train_test_split, KFold
 from xgboost import XGBClassifier
 from tqdm.auto import tqdm
 from jeffutils.utils import movecol
@@ -9,7 +9,7 @@ from warnings import filterwarnings
 from xgboost import dask as dxgb
 from dask import array as da
 from dask import dataframe as dd
-from dask_ml.model_selection import GridSearchCV, KFold
+from dask_ml.model_selection import GridSearchCV#, KFold
 from dask.distributed import Client
 from dask_cuda import LocalCUDACluster
 filterwarnings('ignore')
@@ -136,10 +136,10 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     # dtest = xgb.DMatrix(X_test, y_test, feature_names=X.columns)
     
     # Turn into dask
-    X_train = dd.from_pandas(X_train, npartitions=1).to_dask_array(lengths=True)
-    y_train = dd.from_pandas(y_train, npartitions=1).to_dask_array(lengths=True)
-    X_test = dd.from_pandas(X_test, npartitions=1).to_dask_array(lengths=True)
-    y_test = dd.from_pandas(y_test, npartitions=1).to_dask_array(lengths=True)
+    X_train = dd.from_pandas(X_train, npartitions=1)
+    y_train = dd.from_pandas(y_train, npartitions=1)
+    X_test = dd.from_pandas(X_test, npartitions=1)
+    y_test = dd.from_pandas(y_test, npartitions=1)
     
     # Get cuda stuff
     cluster = LocalCUDACluster()
