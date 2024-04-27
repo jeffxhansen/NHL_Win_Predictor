@@ -140,6 +140,7 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         'tree_method': ['gpu_hist'],
         'lambda': [0.98],
         'eval_metric': ['logloss'],
+        'device': ['cuda'],
         }
     
     # Define cross-validation strategy
