@@ -1,3 +1,4 @@
+import cupy as cp
 import numpy as np
 import pandas as pd
 import pickle
@@ -194,6 +195,10 @@ if __name__ == '__main__':
 
     # Create win column
     df_train['win'], df_test['win'] = (df_train['home_final'] > df_train['away_final']).astype(int), (df_test['home_final'] > df_test['away_final']).astype(int)
+    
+    # Put df_train and df_test on GPU
+    df_train = cp.array(df_train)
+    df_test = cp.array(df_test)
     
     # Iterate through each team
     pbar = tqdm(total=len(df_last_two['home_name'].unique()))
