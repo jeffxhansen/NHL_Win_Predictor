@@ -136,17 +136,14 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     # dtest = xgb.DMatrix(X_test, y_test, feature_names=X.columns)
     
     # Turn into dask
-    X_train = dd.from_pandas(X_train, npartitions=1)
-    y_train = dd.from_pandas(y_train, npartitions=1)
-    X_test = dd.from_pandas(X_test, npartitions=1)
-    y_test = dd.from_pandas(y_test, npartitions=1)
+    X_train = dd.from_pandas(X_train, npartitions=1).to_dask_array(lengths=True)
+    y_train = dd.from_pandas(y_train, npartitions=1).to_dask_array(lengths=True)
+    X_test = dd.from_pandas(X_test, npartitions=1).to_dask_array(lengths=True)
+    y_test = dd.from_pandas(y_test, npartitions=1).to_dask_array(lengths=True)
     
     # Get cuda stuff
     cluster = LocalCUDACluster()
     client =  Client(cluster)
-    
-    print(f'Cluster: {cluster}')
-    print(f'Client: {client}')
 
     # Train the model
     params = {
@@ -181,9 +178,6 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
 
     # Pickle the model
     # Save the model weights as a pickle file
-    print('#'*50)
-    print(f'Saving model for {team_one}')
-    print('#'*50)
     with open(f'team_xgboost_files/{team_one}.pkl', 'wb') as f:
         pickle.dump(model, f)
     
