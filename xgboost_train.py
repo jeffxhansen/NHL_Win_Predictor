@@ -133,10 +133,10 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
             X_test[col] = 0
     
     # Convert Pandas DataFrames to CuPy arrays
-    X_train_gpu = cp.asarray(X_train)
-    y_train_gpu = cp.asarray(y_train)
-    X_test_gpu = cp.asarray(X_test)
-    y_test_gpu = cp.asarray(y_test)
+    X_train_gpu = cp.asarray(X_train.get())
+    y_train_gpu = cp.asarray(y_train.get())
+    X_test_gpu = cp.asarray(X_test.get())
+    y_test_gpu = cp.asarray(y_test.get())
 
     # Create Dask arrays from CuPy arrays
     X_train = da.from_array(X_train_gpu, chunks='auto')
