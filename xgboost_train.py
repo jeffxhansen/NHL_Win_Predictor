@@ -200,8 +200,8 @@ if __name__ == '__main__':
     df_train['win'], df_test['win'] = (df_train['home_final'] > df_train['away_final']).astype(int), (df_test['home_final'] > df_test['away_final']).astype(int)
     
     # Iterate through each team
-    pbar = tqdm(total=len(df_last_two['home_name'].unique()))
-    for team in df_last_two['home_name'].unique():
+    pbar = tqdm(total=len(df_last_two['home_name'].values_host))
+    for team in df_last_two['home_name'].values_host:
         if team == 'American All-Stars':
             continue
         res = get_xgboost_and_pickle(team, df_train, df_test)
