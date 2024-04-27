@@ -177,10 +177,10 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
 
     # Pickle the model
     # Save the model weights as a pickle file
+    print('#'*50)
+    print(f'Saving model for {team_one}')
+    print('#'*50)
     with open(f'team_xgboost_files/{team_one}.pkl', 'wb') as f:
-        print('#'*50)
-        print(f'Saving model for {team_one}')
-        print('#'*50)
         pickle.dump(model, f)
     
     return test_accuracy
