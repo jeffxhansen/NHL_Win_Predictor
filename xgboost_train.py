@@ -115,6 +115,10 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     df_team_one_train = get_team_df(team_one, df_train)
     df_team_one_test = get_team_df(team_one, df_test)
     
+    # Put on GPU
+    df_team_one_train = cudf.from_pandas(df_team_one_train)
+    df_team_one_test = cudf.from_pandas(df_team_one_test)
+    
     # Get X and y
     X_train = df_team_one_train.drop(columns=['game_id', 'team', 'win', 'opp'])
     y_train = df_team_one_train['win']
@@ -175,9 +179,6 @@ if __name__ == '__main__':
                                             'MontrÃ©al Canadiens': 'Montreal Canadiens'})
     df['away_name'] = df['away_name'].replace({'Montréal Canadiens': 'Montreal Canadiens',
                                                 'MontrÃ©al Canadiens': 'Montreal Canadiens'})
-    
-    # Convert to cudf (on gpu)
-    df = cudf.from_pandas(df)
 
     # Get only the rows with game_date >= 2021-10-01
     df_last_two = df[df['game_date'] >= '2018-10-01']
