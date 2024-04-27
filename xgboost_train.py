@@ -166,6 +166,11 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     # Define the model
     # model = dxgb.XGBClassifier(use_label_encoder=False)
     model = XGBClassifier(use_label_encoder=False)
+    
+    print(f'X_train type: {type(X_train)}')
+    print(f'y_train type: {type(y_train)}')
+    print(f'X_test type: {type(X_test)}')
+    print(f'y_test type: {type(y_test)}')
 
     # Perform GridSearchCV
     grid_search = GridSearchCV(estimator=model, param_grid=params, cv=cv, scoring='accuracy', n_jobs=-1, refit=True)
