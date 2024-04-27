@@ -1,12 +1,17 @@
-import cudf
 import numpy as np
 import pandas as pd
 import pickle
-from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
+from sklearn.model_selection import train_test_split, StratifiedKFold
 from xgboost import XGBClassifier
 from tqdm.auto import tqdm
 from jeffutils.utils import movecol
 from warnings import filterwarnings
+from xgboost import dask as dxgb
+from dask import array as da
+from dask import dataframe as dd
+from dask_ml.model_selection import GridSearchCV
+from dask.distributed import Client
+from dask_cuda import LocalCUDACluster
 filterwarnings('ignore')
 
 
@@ -115,10 +120,6 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     df_team_one_train = get_team_df(team_one, df_train)
     df_team_one_test = get_team_df(team_one, df_test)
     
-    # Put on GPU
-    df_team_one_train = cudf.from_pandas(df_team_one_train)
-    df_team_one_test = cudf.from_pandas(df_team_one_test)
-    
     # Get X and y
     X_train = df_team_one_train.drop(columns=['game_id', 'team', 'win', 'opp'])
     y_train = df_team_one_train['win']
@@ -133,6 +134,16 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     # Create a DMatrix
     # dtrain = xgb.DMatrix(X_train, y_train, feature_names=X.columns)
     # dtest = xgb.DMatrix(X_test, y_test, feature_names=X.columns)
+    
+    # Turn into dask
+    X_train = dd.from_pandas(X_train, npartitions=1)
+    y_train = dd.from_pandas(y_train, npartitions=1)
+    X_test = dd.from_pandas(X_test, npartitions=1)
+    y_test = dd.from_pandas(y_test, npartitions=1)
+    
+    # Get cuda stuff
+    cluster = LocalCUDACluster()
+    client =  Client(cluster)
 
     # Train the model
     params = {
@@ -146,12 +157,14 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         'lambda': [0.98],
         'eval_metric': ['logloss'],
         'device': ['cuda'],
+        'client': [client]
         }
     
     # Define cross-validation strategy
     cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
     
     # Define the model
+    # model = dxgb.XGBClassifier(use_label_encoder=False)
     model = XGBClassifier(use_label_encoder=False)
 
     # Perform GridSearchCV
