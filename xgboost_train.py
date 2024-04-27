@@ -137,7 +137,7 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         'colsample_bytree': [0.6, 1.0],
         'max_depth': [3, 5, 10],
         'eta': [0.3, 0.1, 0.05],
-        'tree_method': ['gpu_hist'],
+        'tree_method': ['hist'],
         'lambda': [0.98],
         'eval_metric': ['logloss'],
         'device': ['cuda'],
