@@ -1,4 +1,4 @@
-import cupy as cp
+import cudf
 import numpy as np
 import pandas as pd
 import pickle
@@ -175,6 +175,9 @@ if __name__ == '__main__':
                                             'MontrÃ©al Canadiens': 'Montreal Canadiens'})
     df['away_name'] = df['away_name'].replace({'Montréal Canadiens': 'Montreal Canadiens',
                                                 'MontrÃ©al Canadiens': 'Montreal Canadiens'})
+    
+    # Convert to cudf (on gpu)
+    df = cudf.from_pandas(df)
 
     # Get only the rows with game_date >= 2021-10-01
     df_last_two = df[df['game_date'] >= '2018-10-01']
@@ -195,10 +198,6 @@ if __name__ == '__main__':
 
     # Create win column
     df_train['win'], df_test['win'] = (df_train['home_final'] > df_train['away_final']).astype(int), (df_test['home_final'] > df_test['away_final']).astype(int)
-    
-    # Put df_train and df_test on GPU
-    df_train = cp.array(df_train)
-    df_test = cp.array(df_test)
     
     # Iterate through each team
     pbar = tqdm(total=len(df_last_two['home_name'].unique()))
