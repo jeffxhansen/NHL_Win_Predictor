@@ -172,7 +172,7 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
     model = XGBClassifier(use_label_encoder=False)
 
     # Perform GridSearchCV
-    grid_search = GridSearchCV(estimator=model, param_grid=params, cv=cv, scoring='accuracy', n_jobs=-1, refit=True)
+    grid_search = GridSearchCV(estimator=model, param_grid=params, cv=None, scoring='accuracy', n_jobs=-1, refit=True)
     grid_search.fit(X_train, y_train)
     test_accuracy = grid_search.score(X_test, y_test)
     
