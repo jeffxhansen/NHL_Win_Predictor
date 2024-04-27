@@ -9,7 +9,7 @@ from warnings import filterwarnings
 from xgboost import dask as dxgb
 from dask import array as da
 from dask import dataframe as dd
-from dask_ml.model_selection import GridSearchCV
+from dask_ml.model_selection import GridSearchCV, KFold
 from dask.distributed import Client
 from dask_cuda import LocalCUDACluster
 filterwarnings('ignore')
@@ -164,7 +164,8 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         }
     
     # Define cross-validation strategy
-    cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+    # cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+    cv = KFold(n_splits=3, shuffle=True, random_state=42)
     
     # Define the model
     # model = dxgb.XGBClassifier(use_label_encoder=False)
