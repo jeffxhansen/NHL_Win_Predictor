@@ -1,3 +1,4 @@
+import cupy as cp
 import numpy as np
 import pandas as pd
 import pickle
@@ -131,15 +132,17 @@ def get_xgboost_and_pickle(team_one, df_train, df_test):
         if col not in X_test.columns:
             X_test[col] = 0
     
-    # Create a DMatrix
-    # dtrain = xgb.DMatrix(X_train, y_train, feature_names=X.columns)
-    # dtest = xgb.DMatrix(X_test, y_test, feature_names=X.columns)
-    
-    # Turn into dask
-    X_train = dd.from_pandas(X_train, npartitions=1)
-    y_train = dd.from_pandas(y_train, npartitions=1)
-    X_test = dd.from_pandas(X_test, npartitions=1)
-    y_test = dd.from_pandas(y_test, npartitions=1)
+    # Convert Pandas DataFrames to CuPy arrays
+    X_train_gpu = cp.asarray(X_train)
+    y_train_gpu = cp.asarray(y_train)
+    X_test_gpu = cp.asarray(X_test)
+    y_test_gpu = cp.asarray(y_test)
+
+    # Create Dask arrays from CuPy arrays
+    X_train = da.from_array(X_train_gpu, chunks='auto')
+    y_train = da.from_array(y_train_gpu, chunks='auto')
+    X_test = da.from_array(X_test_gpu, chunks='auto')
+    y_test= da.from_array(y_test_gpu, chunks='auto')
     
     # Get cuda stuff
     cluster = LocalCUDACluster()
