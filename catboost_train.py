@@ -124,14 +124,14 @@ def get_catboost_and_pickle(team_one, df_train, df_test):
     
     # Grid search parameters
     params = {
-        'learning_rate': [0.01, 0.05, 0.1, 0.2],
-        'n_estimators': [100, 200, 500, 1000],
+        'learning_rate': [0.01, 0.05, 0.1],
+        'n_estimators': [100, 500, 1000],
         'max_depth': [3, 4, 5, 6, 7],
-        'subsample': [0.6, 0.7, 0.8, 0.9, 1.0],
-        'colsample_bylevel': [0.6, 0.7, 0.8, 0.9, 1.0],
+        'subsample': [0.6, 0.8, 1.0],
+        'colsample_bylevel': [0.6, 0.8, 1.0],
         'cat_features': [['opponent', 'curr_strength_code']],
-        'l2_leaf_reg': [1, 2, 3, 4, 5],
-        'min_child_samples': [3, 5, 7, 10],
+        'l2_leaf_reg': [1, 3, 5],
+        'min_child_samples': [5, 7, 10],
         'random_seed': [42],  # Keep it constant
         'loss_function': ['Logloss'],  # For binary classification
         'eval_metric': ['AUC'],        # Metric for evaluation
@@ -139,7 +139,7 @@ def get_catboost_and_pickle(team_one, df_train, df_test):
     }
     
     # Define cross-validation strategy
-    cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+    cv = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
     
     # Define the model
     model = CatBoostClassifier()
