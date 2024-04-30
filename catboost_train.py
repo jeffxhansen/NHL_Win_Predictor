@@ -1,14 +1,13 @@
+import os
+from warnings import filterwarnings
+
+from catboost import CatBoostClassifier
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
-from catboost import CatBoostClassifier
-from warnings import filterwarnings
-import pickle
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from tqdm.auto import tqdm
-import json
 
 from jeffutils.utils import movecol
-from jeffutils import utils
 
 filterwarnings('ignore')
 pd.set_option('display.max_columns', None)
@@ -97,20 +96,22 @@ def get_team_df(team_one, df_last_two):
 
 
 def get_catboost_and_pickle(team_one, df_train, df_test):
-    """
-    Trains an XGBoost classifier on data for team_one and saves the model as a pickle file.
+    '''
+    Trains a CatBoost classifier on data for team_one and saves the model.
 
     Args:
     - team_one (str): Name of the team for which the model is trained.
-    - df_last_two (DataFrame): DataFrame containing data for the last two seasons.
+    - df_train (DataFrame): The training dataset.
+    - df_test (DataFrame): The testing dataset.
 
     Returns:
-    - None: The trained XGBoost model is saved as a pickle file.
+    - float: The accuracy of the model on the test dataset.
 
-    Note:
-    This function internally calls the 'get_team_df' function to preprocess the data 
-    before training the XGBoost model. The saved model is named after the team.
-    """
+    This function trains a CatBoost model on the provided training data, performs grid search for hyperparameter tuning, 
+    evaluates the model on the test data, selects the best model, and saves it to a file using built-in catboost model saving.
+    The test accuracy of the model is returned.
+    '''
+    
     # Get the data.
     df_team_one_train = get_team_df(team_one, df_train)
     df_team_one_test = get_team_df(team_one, df_test)
@@ -189,11 +190,22 @@ if __name__ == '__main__':
     # Create win column
     df_train['win'], df_test['win'] = (df_train['home_final'] > df_train['away_final']).astype(int), (df_test['home_final'] > df_test['away_final']).astype(int)
     
+    # Get all the names of the teams in the 'team_catboost_files' directory
+    files = os.listdir('team_catboost_files')
+    
     # Iterate through each team
     pbar = tqdm(total=len(df_last_two['home_name'].unique()))
     for team in df_last_two['home_name'].unique():
         if team == 'American All-Stars':
             continue
-        res = get_catboost_and_pickle(team, df_train, df_test)
-        pbar.update(1)
-        pbar.set_description(f'{team} - {res}')
+        
+        # Check if the team already has a model
+        if team in files:
+            pbar.update(1)
+            pbar.set_description(f'{team} - Already exists')
+            continue
+        
+        else:
+            res = get_catboost_and_pickle(team, df_train, df_test)
+            pbar.update(1)
+            pbar.set_description(f'{team} - {res}')
