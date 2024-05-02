@@ -16,7 +16,7 @@ hockey_teams=("Toronto Maple Leafs" "Washington Capitals" "Vancouver Canucks" \
 # Iterate over each hockey team name
 for team_name in "${hockey_teams[@]}"; do
     # Define your dynamic output file name with the team name
-    output_file="catboost_train_${team_name// /_}.txt"
+    output_file="team_catboost_logs/catboost_train_${team_name// /_}.txt"
 
     # Use the dynamic output file name in your sbatch command
     sbatch --job-name="$team_name" --output="$output_file" cat_jobscript "$team_name"
