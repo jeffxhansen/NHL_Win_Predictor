@@ -12,4 +12,4 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
 mamba activate nhl_pred
-python ~/NHL_Win_Predictor/catboost_train.py
+python ~/NHL_Win_Predictor/catboost_train.py --team $1
