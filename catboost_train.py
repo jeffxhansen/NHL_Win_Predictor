@@ -1,3 +1,4 @@
+import argparse
 import os
 from warnings import filterwarnings
 
@@ -146,7 +147,7 @@ def get_catboost_and_pickle(team_one, df_train, df_test):
     model = CatBoostClassifier()
     
     # Perform GridSearchCV
-    grid_search = GridSearchCV(estimator=model, param_grid=params, cv=cv, scoring='accuracy', n_jobs=80, refit=True)
+    grid_search = GridSearchCV(estimator=model, param_grid=params, cv=cv, scoring='accuracy', n_jobs=-1, refit=True)
     grid_search.fit(X_train, y_train)
     test_accuracy = grid_search.score(X_test, y_test)
     
@@ -159,12 +160,29 @@ def get_catboost_and_pickle(team_one, df_train, df_test):
     return test_accuracy
 
 
+def get_train_test():
+    """
+    Read in the data and split it into training and testing datasets.
+    
+    Reads in a Feather dataset containing play-by-play data and preprocesses it by removing columns 
+    containing '_raw' in their names, correcting team names, and filtering rows based on game dates. 
+    Splits the preprocessed dataset into training and testing datasets based on a cutoff date. 
+    Drops columns not needed for XGBoost modeling. Adds a 'win' column indicating whether the home 
+    team won the game.
 
-if __name__ == '__main__':
+    Returns:
+        df_last_two (DataFrame): The preprocessed dataset containing play-by-play data with game 
+            dates starting from '2018-10-01'.
+        df_train (DataFrame): The training dataset containing preprocessed play-by-play data with 
+            game dates before '2023-10-01'.
+        df_test (DataFrame): The testing dataset containing preprocessed play-by-play data with 
+            game dates on and after '2023-10-01'.
+    """
     # Read in the data
     df = pd.read_feather('./data/play_by_play_full_state_space.feather')
     df = df.loc[:, ~df.columns.str.contains('_raw')]
 
+    # Correct team names
     df['home_name'] = df['home_name'].replace({'Montréal Canadiens': 'Montreal Canadiens',
                                             'MontrÃ©al Canadiens': 'Montreal Canadiens'})
     df['away_name'] = df['away_name'].replace({'Montréal Canadiens': 'Montreal Canadiens',
@@ -173,9 +191,10 @@ if __name__ == '__main__':
     # Get only the rows with game_date >= 2021-10-01
     df_last_two = df[df['game_date'] >= '2018-10-01']
 
+    # Split into training and testing datasets (current season is testing)
     df_train, df_test = df_last_two[df_last_two['game_date'] < '2023-10-01'], df_last_two[df_last_two['game_date'] >= '2023-10-01']
 
-    # Drop columns we do not need for XGBoost
+    # Drop columns we do not need for model training
     drop_columns = ['game_date', 'date_time',
                             'event_type', 'penalty_severity', 'penalty_minutes', 'event_team',
                             'event_team_type', 'period_type', 'period', 'period_seconds',
@@ -183,29 +202,60 @@ if __name__ == '__main__':
                             'strength_state', 'strength', 'empty_net',
                             'extra_attacker', 'home_skaters', 'away_skaters', 'order',
                             ]
-
     df_train.drop(columns=drop_columns, inplace=True)
     df_test.drop(columns=drop_columns, inplace=True)
 
     # Create win column
     df_train['win'], df_test['win'] = (df_train['home_final'] > df_train['away_final']).astype(int), (df_test['home_final'] > df_test['away_final']).astype(int)
     
-    # Get all the names of the teams in the 'team_catboost_files' directory
-    files = os.listdir('team_catboost_files')
+    return df_last_two, df_train, df_test
+
+
+def train_model(teams, df_train, df_test):
+    pbar = tqdm(total=len(teams))
+    for team in teams:
+        res = get_catboost_and_pickle(team, df_train, df_test)
+        pbar.update(1)
+        pbar.set_description(f'{team} - {res}')
+
+
+if __name__ == '__main__':
+    # Set up argparse and parse any arguments that come in from commandline.
+    parser = argparse.ArgumentParser(description='Train CatBoost model for a given team.')
+    parser.add_argument('--team', type=str, help='Name of the team for which the model is trained.')
+    parser.add_argument('--all', action='store_false', help='Train models for all teams or not.')
+    args = parser.parse_args()
     
-    # Iterate through each team
-    pbar = tqdm(total=len(df_last_two['home_name'].unique()))
-    for team in df_last_two['home_name'].unique():
-        if team == 'American All-Stars':
-            continue
+    # Get the team name
+    team = args.team
+    all_teams = args.all
+    print(f'Team: {team}, All Teams: {args.all}')
+    
+    # Call function that splits train and test data
+    df_last_two, df_train, df_test = get_train_test()
+    
+    # If team is none, train all teams
+    if team is None:
+        teams = df_last_two['home_name'].unique()
         
-        # Check if the team already has a model
-        if team in files:
-            pbar.update(1)
-            pbar.set_description(f'{team} - Already exists')
-            continue
+        # Check if we are training all teams or only ones that have not been trained yet
+        if all_teams:
+            print('Training all teams')
+            
+            # Train every team
+            train_model(teams, df_train, df_test)
+        elif not all_teams:
+            print('Training only teams that do not have a model')
+            
+            # Train only teams that do not have a model
+            files = os.listdir('team_catboost_files')
+            teams = [team for team in teams if team not in files]
+            train_model(teams, df_train, df_test)
+    
+    # If team is not none, train only that team
+    elif team is not None:
+        print(f'Training {team}')
         
-        else:
-            res = get_catboost_and_pickle(team, df_train, df_test)
-            pbar.update(1)
-            pbar.set_description(f'{team} - {res}')
+        res = get_catboost_and_pickle(team, df_train, df_test)
+        print(f'{team} - {res}')
+            
